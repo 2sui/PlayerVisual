@@ -9,17 +9,30 @@
 import UIKit
 
 class ViewController: UIViewController {
+    var player: PlayerVisual!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        player = PlayerVisual()
+        player.addToViewController(self, toView: self.view)
+        
+        self.view.autoresizingMask = [UIViewAutoresizing.FlexibleHeight, UIViewAutoresizing.FlexibleWidth]
+        player.view.autoresizingMask = [UIViewAutoresizing.FlexibleHeight, UIViewAutoresizing.FlexibleWidth]
+        player.playbackLoops = true
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let url = NSURL(string: "https://static.videezy.com/system/resources/previews/000/002/473/original/josie-hd-stock-video.mp4")!
+        player.setUrl(url)
+    }
 }
 

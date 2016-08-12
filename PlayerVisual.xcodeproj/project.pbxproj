@@ -12,6 +12,9 @@
 		2417644E1D5DBE830034FAD3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2417644C1D5DBE830034FAD3 /* Main.storyboard */; };
 		241764501D5DBE830034FAD3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2417644F1D5DBE830034FAD3 /* Assets.xcassets */; };
 		241764531D5DBE830034FAD3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 241764511D5DBE830034FAD3 /* LaunchScreen.storyboard */; };
+		241764951D5DCBBB0034FAD3 /* PlayerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2417647E1D5DCBBB0034FAD3 /* PlayerExtension.swift */; };
+		241764961D5DCBBB0034FAD3 /* PlayerVisual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2417647F1D5DCBBB0034FAD3 /* PlayerVisual.swift */; };
+		2417649E1D5DCBD80034FAD3 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2417649D1D5DCBD80034FAD3 /* Player.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,9 @@
 		2417644F1D5DBE830034FAD3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		241764521D5DBE830034FAD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		241764541D5DBE830034FAD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2417647E1D5DCBBB0034FAD3 /* PlayerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerExtension.swift; sourceTree = "<group>"; };
+		2417647F1D5DCBBB0034FAD3 /* PlayerVisual.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerVisual.swift; sourceTree = "<group>"; };
+		2417649D1D5DCBD80034FAD3 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Player.swift; path = Player/Sources/Player.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +44,7 @@
 		2417643C1D5DBE830034FAD3 = {
 			isa = PBXGroup;
 			children = (
+				2417645E1D5DCBBB0034FAD3 /* Source */,
 				241764471D5DBE830034FAD3 /* PlayerVisual */,
 				241764461D5DBE830034FAD3 /* Products */,
 			);
@@ -62,6 +69,16 @@
 				241764541D5DBE830034FAD3 /* Info.plist */,
 			);
 			path = PlayerVisual;
+			sourceTree = "<group>";
+		};
+		2417645E1D5DCBBB0034FAD3 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				2417649D1D5DCBD80034FAD3 /* Player.swift */,
+				2417647E1D5DCBBB0034FAD3 /* PlayerExtension.swift */,
+				2417647F1D5DCBBB0034FAD3 /* PlayerVisual.swift */,
+			);
+			path = Source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,7 +153,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				241764961D5DCBBB0034FAD3 /* PlayerVisual.swift in Sources */,
+				241764951D5DCBBB0034FAD3 /* PlayerExtension.swift in Sources */,
 				2417644B1D5DBE830034FAD3 /* ViewController.swift in Sources */,
+				2417649E1D5DCBD80034FAD3 /* Player.swift in Sources */,
 				241764491D5DBE830034FAD3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -289,6 +309,7 @@
 				241764591D5DBE830034FAD3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
