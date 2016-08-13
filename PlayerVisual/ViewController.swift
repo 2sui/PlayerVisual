@@ -20,6 +20,8 @@ class ViewController: UIViewController {
         
         self.view.autoresizingMask = [UIViewAutoresizing.FlexibleHeight, UIViewAutoresizing.FlexibleWidth]
         player.view.autoresizingMask = [UIViewAutoresizing.FlexibleHeight, UIViewAutoresizing.FlexibleWidth]
+        player.playbackEdgeTriggered = false
+        player.autoPlay = true
         player.playbackLoops = true
     }
 
@@ -31,7 +33,7 @@ class ViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        let url = NSURL(string: "https://static.videezy.com/system/resources/previews/000/002/473/original/josie-hd-stock-video.mp4")!
+        let url = NSURL(string: "https://static.videezy.com/system/resources/previews/000/004/685/original/Geo_Glass_-_Slideshow.mp4")!
         player.setUrl(url)
     }
 }

@@ -2,47 +2,36 @@
 //  PlayerVisual.swift
 //  PlayerVisual
 //
-//  Created by zm_iOS on 16/8/12.
-//  Copyright © 2016年 zm_iOS. All rights reserved.
-//
 
 import UIKit
 
+
 @objc
 public protocol PlayerVisualIndictaorViewDelegate: NSObjectProtocol {
+    // first add to layer
+    func indictaorViewStatuInit()
     
-    func startAnimating()
+    // video asset ready to play
+    func indictaorViewReadyToPlay()
     
-    func stopAnimating()
+    func indictaorViewPlay()
     
-    func isAnimating() -> Bool
-}
-
-extension UIActivityIndicatorView: PlayerVisualIndictaorViewDelegate {
-}
-
-@objc
-public protocol PlayerVisualHolderViewDelegate: NSObjectProtocol {
-    optional func holderViewStatuInit()
+    func indictaorViewPause()
     
-    optional func holderViewStatuReady()
+    func indictaorViewStop()
     
-    optional func holderViewStatuPlaying()
+    func indictaorViewFail()
     
-    optional func holderViewStatuePause()
+    func indictaorViewBufferReady()
     
-    optional func holderViewStatueStop()
+    func indictaorViewBufferDelay()
     
-    optional func holderViewStatueFail()
-}
-
-extension UIView: PlayerVisualHolderViewDelegate {
+    func indictaorViewBufferError()
 }
 
 
 @objc
 public protocol PlayerVisualDelegate: NSObjectProtocol {
-    
 }
 
 
@@ -52,13 +41,6 @@ public class PlayerVisual: Player, PlayerDelegate {
     public var indictaorView: PlayerVisualIndictaorViewDelegate? {
         didSet {
             if !(indictaorView is UIView) {
-                indictaorView = nil
-            }
-        }
-    }
-    public var holderView: PlayerVisualHolderViewDelegate? {
-        didSet {
-            if !(holderView is UIView) {
                 indictaorView = nil
             }
         }
@@ -90,9 +72,6 @@ public class PlayerVisual: Player, PlayerDelegate {
         
         if nil != toView {
             self.prepareComponent()
-            (self.indictaorView! as! UIActivityIndicatorView).center = toView!.center
-            (self.holderView! as! UIView).center = toView!.center
-            self.view.addSubview((self.indictaorView! as! UIActivityIndicatorView))
             
         } else {
             (self.indictaorView as? UIActivityIndicatorView)?.removeFromSuperview()
@@ -105,27 +84,21 @@ extension PlayerVisual {
     
     private func prepareComponent() {
         self.prepareIndictaorComponent()
-        self.prepareHolderViewComponent()
     }
     
     private func prepareIndictaorComponent() {
         if nil == self.indictaorView {
-            self.indictaorView = UIActivityIndicatorView()
-            (self.indictaorView! as! UIActivityIndicatorView).frame.size = CGSizeMake(40, 40)
-            (self.indictaorView! as! UIActivityIndicatorView).hidesWhenStopped = true
-            (self.indictaorView! as! UIActivityIndicatorView).autoresizingMask = [UIViewAutoresizing.FlexibleTopMargin, UIViewAutoresizing.FlexibleLeftMargin, UIViewAutoresizing.FlexibleBottomMargin, UIViewAutoresizing.FlexibleRightMargin]
+            self.indictaorView = PlayerVisualIndictaorView(frame: CGRectMake(0, 0, self.view.bounds.width, self.view.bounds.height))
+            (self.indictaorView! as! UIView).center = self.view.center
         }
+        
+        if nil != self.indictaorView {
+            self.view.addSubview(self.indictaorView! as! UIView)
+        }
+        
+        self.indictaorView?.indictaorViewStatuInit()
     }
     
-    private func prepareHolderViewComponent() {
-        if nil == holderView {
-            self.holderView = UIView()
-            (self.holderView! as! UIView).frame = self.view.bounds
-            (self.holderView! as! UIView).alpha = 0.5
-            (self.holderView! as! UIView).backgroundColor = UIColor.blackColor()
-            (self.holderView! as! UIView).autoresizingMask = [UIViewAutoresizing.FlexibleTopMargin, UIViewAutoresizing.FlexibleLeftMargin, UIViewAutoresizing.FlexibleBottomMargin, UIViewAutoresizing.FlexibleRightMargin]
-        }
-    }
 }
 
 extension PlayerVisual {
@@ -134,52 +107,27 @@ extension PlayerVisual {
         
         if self.autoPlay {
             player.playFromBeginning()
+            
         } else {
-            self.holderView?.holderViewStatuReady?()
+            self.indictaorView?.indictaorViewReadyToPlay()
         }
     }
     
     public func playerPlaybackStateDidChange(player: Player) {
-        NSLog("\(#function) \(player.playbackState)")
         
         switch player.playbackState {
             
         case .Some(.Failed):
-            if let indictaor = self.indictaorView {
-                if indictaor.isAnimating() {
-                    indictaor.stopAnimating()
-                }
-            }
-            
-            self.holderView?.holderViewStatueFail?()
+            self.indictaorView?.indictaorViewFail()
             
         case .Some(.Stopped):
-            if let indictaor = self.indictaorView {
-                if indictaor.isAnimating() {
-                    indictaor.stopAnimating()
-                }
-            }
-            
-            self.holderView?.holderViewStatueStop?()
+            self.indictaorView?.indictaorViewStop()
             
         case .Some(.Paused):
-            if let indictaor = self.indictaorView {
-                if indictaor.isAnimating() {
-                    indictaor.stopAnimating()
-                }
-            }
-            
-            self.holderView?.holderViewStatuePause?()
+            self.indictaorView?.indictaorViewPause()
             
         case .Some(.Playing):
-            
-            if let indictaor = self.indictaorView {
-                if indictaor.isAnimating() {
-                    indictaor.stopAnimating()
-                }
-            }
-            
-            self.holderView?.holderViewStatuInit?()
+            self.indictaorView?.indictaorViewPlay()
             
         default:
             break
@@ -187,30 +135,22 @@ extension PlayerVisual {
     }
     
     public func playerBufferingStateDidChange(player: Player) {
-        NSLog("\(#function) \(player.bufferingState)")
-        
-        if player.playbackState == .Playing {
+        switch player.bufferingState {
+        case .None:
+            self.indictaorView?.indictaorViewBufferError()
             
-            switch player.bufferingState {
-            case .None, .Some(.Unknown), .Some(.Delayed):
-                if let indictaor = self.indictaorView {
-                    if !indictaor.isAnimating() {
-                        indictaor.startAnimating()
-                    }
-                }
-                
-            default:
-                if let indictaor = self.indictaorView {
-                    if indictaor.isAnimating() {
-                        indictaor.stopAnimating()
-                    }
-                }
-            }
+        case .Some(.Delayed):
+            self.indictaorView?.indictaorViewBufferDelay()
+            
+        case .Some(.Ready):
+            self.indictaorView?.indictaorViewBufferReady()
+            
+        default:
+            break
         }
     }
     
     public func playerCurrentTimeDidChange(player: Player) {
-        //        NSLog("\(#function) \(player.currentTime)")
     }
     
     public func playerPlaybackWillStartFromBeginning(player: Player) {
@@ -218,6 +158,6 @@ extension PlayerVisual {
     }
     
     public func playerPlaybackDidEnd(player: Player) {
-        NSLog("\(#function) \(player.playbackState)")
+        NSLog("\(#function)")
     }
 }

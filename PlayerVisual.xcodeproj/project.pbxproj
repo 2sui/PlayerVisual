@@ -15,6 +15,7 @@
 		241764951D5DCBBB0034FAD3 /* PlayerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2417647E1D5DCBBB0034FAD3 /* PlayerExtension.swift */; };
 		241764961D5DCBBB0034FAD3 /* PlayerVisual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2417647F1D5DCBBB0034FAD3 /* PlayerVisual.swift */; };
 		2417649E1D5DCBD80034FAD3 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2417649D1D5DCBD80034FAD3 /* Player.swift */; };
+		2434F5981D5EA90800FEAA32 /* PlayVisualComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2434F5971D5EA90800FEAA32 /* PlayVisualComponent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		2417647E1D5DCBBB0034FAD3 /* PlayerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerExtension.swift; sourceTree = "<group>"; };
 		2417647F1D5DCBBB0034FAD3 /* PlayerVisual.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerVisual.swift; sourceTree = "<group>"; };
 		2417649D1D5DCBD80034FAD3 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Player.swift; path = Player/Sources/Player.swift; sourceTree = "<group>"; };
+		2434F5971D5EA90800FEAA32 /* PlayVisualComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayVisualComponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 				2417649D1D5DCBD80034FAD3 /* Player.swift */,
 				2417647E1D5DCBBB0034FAD3 /* PlayerExtension.swift */,
 				2417647F1D5DCBBB0034FAD3 /* PlayerVisual.swift */,
+				2434F5971D5EA90800FEAA32 /* PlayVisualComponent.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -154,6 +157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				241764961D5DCBBB0034FAD3 /* PlayerVisual.swift in Sources */,
+				2434F5981D5EA90800FEAA32 /* PlayVisualComponent.swift in Sources */,
 				241764951D5DCBBB0034FAD3 /* PlayerExtension.swift in Sources */,
 				2417644B1D5DBE830034FAD3 /* ViewController.swift in Sources */,
 				2417649E1D5DCBD80034FAD3 /* Player.swift in Sources */,
