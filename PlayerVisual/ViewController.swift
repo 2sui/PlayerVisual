@@ -20,9 +20,9 @@ class ViewController: UIViewController {
         
         self.view.autoresizingMask = [UIViewAutoresizing.FlexibleHeight, UIViewAutoresizing.FlexibleWidth]
         player.view.autoresizingMask = [UIViewAutoresizing.FlexibleHeight, UIViewAutoresizing.FlexibleWidth]
-        player.playbackEdgeTriggered = false
-        player.autoPlay = true
-        player.playbackLoops = true
+        player.playbackEdgeTriggered = true
+        player.autoPlay = false
+        player.playbackLoops = false
     }
 
     override func didReceiveMemoryWarning() {

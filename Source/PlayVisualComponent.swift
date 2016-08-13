@@ -4,122 +4,114 @@
 //
 
 import UIKit
+import YYImage
 
 
-public class PlayerVisualIndictaorView: UIView, PlayerVisualIndictaorViewDelegate {
- 
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.prepareIndictaorView()
+// MAKR: -
+
+// MARK: PlayerVisualIndictaor
+
+public class PlayerVisualIndictaor: NSObject, PlayerVisualIndictaorViewDelegate {
+    
+    override init() {
+        super.init()
+        self.prepareIndictaorViews()
     }
-    
-    public required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        self.prepareIndictaorView()
-    }
-    
-    
+
     // MARK: private 
     
-    private var isPlaying = false {
-        didSet {
-            if isPlaying {
-                self.hidden = true
-                
-            } else {
-                self.hidden = false
-            }
-            
-            if self.indictaor.isAnimating() {
-                self.indictaor.stopAnimating()
-            }
-        }
-    }
-    private var isBufferDelay = false {
-        didSet {
-            if self.isPlaying {
-                if self.isBufferDelay {
-                    self.addSubview(self.indictaor)
-                    self.hidden = false
-                    if !self.indictaor.isAnimating() {
-                        self.indictaor.startAnimating()
-                    }
-                    
-                } else {
-                    self.hidden = true
-                    self.indictaor.removeFromSuperview()
-                    if self.indictaor.isAnimating() {
-                        self.indictaor.stopAnimating()
-                    }
-                }
-            }
-        }
-    }
-    private let indictaor = UIActivityIndicatorView()
+    private let playIcon = YYAnimatedImageView(frame: CGRectMake(0, 0, 100, 100))
+    private let stopIcon = YYAnimatedImageView(frame: CGRectMake(0, 0, 100, 100))
+    private let initIcon = YYAnimatedImageView(frame: CGRectMake(0, 0, 95, 41))
+    private let loadingIcon = YYAnimatedImageView(frame: CGRectMake(0, 0, 125, 47))
     
-    private func prepareIndictaorView() {
-        self.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
+    private func prepareIndictaorViews() {
+        if let path = NSBundle.mainBundle().pathForResource("play", ofType: "png") {
+            let image = YYImage(contentsOfFile: path)
+            playIcon.image = image
+        }
+        if let path = NSBundle.mainBundle().pathForResource("bufferLoading", ofType: "gif") {
+            let image = YYImage(contentsOfFile: path)
+            loadingIcon.image = image
+        }
+        if let path = NSBundle.mainBundle().pathForResource("wait", ofType: "png") {
+            let image = YYImage(contentsOfFile: path)
+            initIcon.image = image
+        }
+        if let path = NSBundle.mainBundle().pathForResource("stop", ofType: "png") {
+            let image = YYImage(contentsOfFile: path)
+            stopIcon.image = image
+        }
         
-        self.indictaor.frame = CGRectMake(0, 0, 40, 40)
-        self.indictaor.center = self.center
-        self.indictaor.hidesWhenStopped = true
-        self.indictaor.autoresizingMask = [UIViewAutoresizing.FlexibleLeftMargin, UIViewAutoresizing.FlexibleTopMargin, UIViewAutoresizing.FlexibleRightMargin, UIViewAutoresizing.FlexibleBottomMargin]
-    }
-    
-    
-}
-
-extension PlayerVisualIndictaorView {
-    
-    public override func layoutSubviews() {
-        super.layoutSubviews()
+        playIcon.autoresizingMask = [UIViewAutoresizing.FlexibleLeftMargin, UIViewAutoresizing.FlexibleTopMargin, UIViewAutoresizing.FlexibleRightMargin, UIViewAutoresizing.FlexibleBottomMargin]
+        loadingIcon.autoresizingMask = [UIViewAutoresizing.FlexibleLeftMargin, UIViewAutoresizing.FlexibleTopMargin, UIViewAutoresizing.FlexibleRightMargin, UIViewAutoresizing.FlexibleBottomMargin]
+        initIcon.autoresizingMask = [UIViewAutoresizing.FlexibleLeftMargin, UIViewAutoresizing.FlexibleTopMargin, UIViewAutoresizing.FlexibleRightMargin, UIViewAutoresizing.FlexibleBottomMargin]
+        stopIcon.autoresizingMask = [UIViewAutoresizing.FlexibleLeftMargin, UIViewAutoresizing.FlexibleTopMargin, UIViewAutoresizing.FlexibleRightMargin, UIViewAutoresizing.FlexibleBottomMargin]
+        
     }
 }
 
-
-extension PlayerVisualIndictaorView {
-    
+extension PlayerVisualIndictaor {
     // first add to layer
-    public func indictaorViewStatuInit() {
+    public func indictaorViewStatuInit(playerView: UIView) -> UIView? {
         NSLog("\(#function)")
+        self.initIcon.center = playerView.center
+        return self.initIcon
     }
     
     // video asset ready to play
-    public func indictaorViewReadyToPlay() {
+    public func indictaorViewReadyToPlay(playerView: UIView) -> UIView? {
         NSLog("\(#function)")
+        self.playIcon.center = playerView.center
+        return self.playIcon
     }
     
-    public func indictaorViewPlay() {
+    public func indictaorViewPlay(playerView: UIView) -> UIView? {
         NSLog("\(#function)")
-        self.isPlaying = true
+        return nil
     }
     
-    public func indictaorViewPause() {
+    public func indictaorViewPause(playerView: UIView) -> UIView? {
         NSLog("\(#function)")
-        self.isPlaying = false
+        self.stopIcon.center = playerView.center
+        return self.stopIcon
     }
     
-    public func indictaorViewStop() {
+    public func indictaorViewStop(playerView: UIView) -> UIView? {
         NSLog("\(#function)")
-        self.isPlaying = false
+        self.playIcon.center = playerView.center
+        return self.playIcon
     }
     
-    public func indictaorViewFail() {
+    public func indictaorViewFail(playerView: UIView) -> UIView? {
         NSLog("\(#function)")
-        self.isPlaying = false
+        self.stopIcon.center = playerView.center
+        return self.stopIcon
     }
     
-    public func indictaorViewBufferReady() {
+    public func indictaorViewBufferReady(playerView: UIView) -> UIView? {
         NSLog("\(#function)")
-        self.isBufferDelay = false
+        return nil
     }
     
-    public func indictaorViewBufferDelay() {
+    public func indictaorViewBufferDelay(playerView: UIView) -> UIView? {
         NSLog("\(#function)")
-        self.isBufferDelay = true
+        self.loadingIcon.center = playerView.center
+        return self.loadingIcon
     }
     
-    public func indictaorViewBufferError() {
+    public func indictaorViewBufferError(playerView: UIView) -> UIView? {
         NSLog("\(#function)")
+        return nil
     }
 }
+
+
+// MARK: -
+
+// MAKR: 
+
+class PlayerVisualControlBar: UIView {
+    
+}
+

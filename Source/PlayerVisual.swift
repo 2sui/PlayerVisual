@@ -6,50 +6,54 @@
 import UIKit
 
 
+// MARK: -
+
+// MARK: PlayerVisualIndictaorViewDelegate
+
 @objc
 public protocol PlayerVisualIndictaorViewDelegate: NSObjectProtocol {
     // first add to layer
-    func indictaorViewStatuInit()
+    func indictaorViewStatuInit(playerView: UIView) -> UIView?
     
     // video asset ready to play
-    func indictaorViewReadyToPlay()
+    func indictaorViewReadyToPlay(playerView: UIView) -> UIView?
     
-    func indictaorViewPlay()
+    func indictaorViewPlay(playerView: UIView) -> UIView?
     
-    func indictaorViewPause()
+    func indictaorViewPause(playerView: UIView) -> UIView?
     
-    func indictaorViewStop()
+    func indictaorViewStop(playerView: UIView) -> UIView?
     
-    func indictaorViewFail()
+    func indictaorViewFail(playerView: UIView) -> UIView?
     
-    func indictaorViewBufferReady()
+    func indictaorViewBufferReady(playerView: UIView) -> UIView?
     
-    func indictaorViewBufferDelay()
+    func indictaorViewBufferDelay(playerView: UIView) -> UIView?
     
-    func indictaorViewBufferError()
+    func indictaorViewBufferError(playerView: UIView) -> UIView?
 }
 
 
 @objc
-public protocol PlayerVisualDelegate: NSObjectProtocol {
+public protocol PlayerVisualControlBarDelegate: NSObjectProtocol {
 }
 
 
+// MARK: -
+
+// MARK: PlayerVisual
+
 public class PlayerVisual: Player, PlayerDelegate {
     
-    public weak var playerDelegate: PlayerVisualDelegate?
-    public var indictaorView: PlayerVisualIndictaorViewDelegate? {
-        didSet {
-            if !(indictaorView is UIView) {
-                indictaorView = nil
-            }
-        }
-    }
-    
+    public weak var controlBarDelegate: PlayerVisualControlBarDelegate?
+    public weak var indictaorViewDelegate: PlayerVisualIndictaorViewDelegate?
     public var autoPlay: Bool = true
+    
     
     public convenience init() {
         self.init(nibName: nil, bundle: nil)
+        self.indictaor = PlayerVisualIndictaor()
+        self.indictaorViewDelegate = self.indictaor
     }
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -63,8 +67,8 @@ public class PlayerVisual: Player, PlayerDelegate {
     }
     
     deinit {
-        playerDelegate = nil
-        indictaorView = nil
+        controlBarDelegate = nil
+        indictaorViewDelegate = nil
     }
     
     public override func addLayerToView(toView: UIView?) {
@@ -74,31 +78,67 @@ public class PlayerVisual: Player, PlayerDelegate {
             self.prepareComponent()
             
         } else {
-            (self.indictaorView as? UIActivityIndicatorView)?.removeFromSuperview()
+            self.indictaorView = nil
         }
+    }
+    
+    
+    // MARK: private
+    private var indictaor: PlayerVisualIndictaorViewDelegate?
+    private var indictaorView: UIView? {
+        didSet {
+            if indictaorView != oldValue {
+                oldValue?.removeFromSuperview()
+                
+                if nil != indictaorView {
+                    self.view.addSubview(indictaorView!)
+                }
+            }
+        }
+    }
+    private var controlBar: PlayerVisualControlBarDelegate?
+    private var controlBarView: UIView? {
+        didSet {
+            
+        }
+    }
+    
+    private func prepareComponent() {
+        self.prepareInteractive()
+        self.prepareControlBarComponent()
+        self.prepareIndictaorComponent()
+    }
+    
+    private func prepareInteractive() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(playerViewTapped))
+        self.view.userInteractionEnabled = true
+        self.view.addGestureRecognizer(tapGesture)
+    }
+    
+    private func prepareIndictaorComponent() {
+        self.indictaorView = self.indictaorViewDelegate?.indictaorViewStatuInit(self.view)
+    }
+    
+    private func prepareControlBarComponent() {
+        // TODO: Add control bar
     }
     
 }
 
+// MAKR: Callbacks
+
 extension PlayerVisual {
     
-    private func prepareComponent() {
-        self.prepareIndictaorComponent()
-    }
-    
-    private func prepareIndictaorComponent() {
-        if nil == self.indictaorView {
-            self.indictaorView = PlayerVisualIndictaorView(frame: CGRectMake(0, 0, self.view.bounds.width, self.view.bounds.height))
-            (self.indictaorView! as! UIView).center = self.view.center
+    func playerViewTapped() {
+        if .Failed != self.playbackState {
+            if .Playing == self.playbackState {
+                self.pause()
+                
+            } else {
+                self.playFromCurrentTime()
+            }
         }
-        
-        if nil != self.indictaorView {
-            self.view.addSubview(self.indictaorView! as! UIView)
-        }
-        
-        self.indictaorView?.indictaorViewStatuInit()
     }
-    
 }
 
 extension PlayerVisual {
@@ -109,7 +149,7 @@ extension PlayerVisual {
             player.playFromBeginning()
             
         } else {
-            self.indictaorView?.indictaorViewReadyToPlay()
+            self.indictaorView = self.indictaorViewDelegate?.indictaorViewReadyToPlay(self.view)
         }
     }
     
@@ -118,16 +158,16 @@ extension PlayerVisual {
         switch player.playbackState {
             
         case .Some(.Failed):
-            self.indictaorView?.indictaorViewFail()
+            self.indictaorView = self.indictaorViewDelegate?.indictaorViewFail(self.view)
             
         case .Some(.Stopped):
-            self.indictaorView?.indictaorViewStop()
+            self.indictaorView = self.indictaorViewDelegate?.indictaorViewStop(self.view)
             
         case .Some(.Paused):
-            self.indictaorView?.indictaorViewPause()
+            self.indictaorView = self.indictaorViewDelegate?.indictaorViewPause(self.view)
             
         case .Some(.Playing):
-            self.indictaorView?.indictaorViewPlay()
+            self.indictaorView = self.indictaorViewDelegate?.indictaorViewPlay(self.view)
             
         default:
             break
@@ -137,13 +177,13 @@ extension PlayerVisual {
     public func playerBufferingStateDidChange(player: Player) {
         switch player.bufferingState {
         case .None:
-            self.indictaorView?.indictaorViewBufferError()
+            self.indictaorView = self.indictaorViewDelegate?.indictaorViewBufferError(self.view)
             
         case .Some(.Delayed):
-            self.indictaorView?.indictaorViewBufferDelay()
+            self.indictaorView = self.indictaorViewDelegate?.indictaorViewBufferDelay(self.view)
             
         case .Some(.Ready):
-            self.indictaorView?.indictaorViewBufferReady()
+            self.indictaorView = self.indictaorViewDelegate?.indictaorViewBufferReady(self.view)
             
         default:
             break
@@ -159,5 +199,6 @@ extension PlayerVisual {
     
     public func playerPlaybackDidEnd(player: Player) {
         NSLog("\(#function)")
+        
     }
 }
