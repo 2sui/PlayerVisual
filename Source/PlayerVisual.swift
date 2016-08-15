@@ -8,34 +8,42 @@ import UIKit
 
 // MARK: -
 
-// MARK: PlayerVisualIndictaorViewDelegate
+// MARK: PlayerVisualViewDelegate
 
 @objc
-public protocol PlayerVisualIndictaorViewDelegate: NSObjectProtocol {
-    // first add to layer
-    func indictaorViewStatuInit(playerView: UIView) -> UIView?
+public protocol PlayerVisualViewDelegate: NSObjectProtocol {
     
-    // video asset ready to play
-    func indictaorViewReadyToPlay(playerView: UIView) -> UIView?
+    func playerVisualViewStatuInitWithPlaceHolder(playerVisual: PlayerVisual) -> UIView?
     
-    func indictaorViewPlay(playerView: UIView) -> UIView?
+    func playerVisualViewReadyToPlayWithPlaceHolder(playerVisual: PlayerVisual) -> UIView?
     
-    func indictaorViewPause(playerView: UIView) -> UIView?
+    func playerVisualViewPlayWithPlaceHolder(playerVisual: PlayerVisual) -> UIView?
     
-    func indictaorViewStop(playerView: UIView) -> UIView?
+    func playerVisualViewPauseWithPlaceHolder(playerVisual: PlayerVisual) -> UIView?
     
-    func indictaorViewFail(playerView: UIView) -> UIView?
+    func playerVisualViewStopWithPlaceHolder(playerVisual: PlayerVisual) -> UIView?
     
-    func indictaorViewBufferReady(playerView: UIView) -> UIView?
+    func playerVisualViewFailWithPlaceHolder(playerVisual: PlayerVisual) -> UIView?
     
-    func indictaorViewBufferDelay(playerView: UIView) -> UIView?
+    optional func playerVisualViewTappedShouldPlay(playerVisual: PlayerVisual) -> Bool
     
-    func indictaorViewBufferError(playerView: UIView) -> UIView?
-}
-
-
-@objc
-public protocol PlayerVisualControlBarDelegate: NSObjectProtocol {
+    optional func playerVisualViewSlidedShouldSeekToTime(playerVisual: PlayerVisual) -> NSTimeInterval
+    
+    // MARK: indictaor view
+    
+    func playerVisualIndictaorViewReady(playerVisual: PlayerVisual) -> UIView?
+    
+    func playerVisualIndictaorViewDelay(playerVisual: PlayerVisual) -> UIView?
+    
+    func playerVisualIndictaorViewError(playerVisual: PlayerVisual) -> UIView?
+    
+    // MARK: control bar
+    
+    func playerVisualControlBarHeight(playerVisual: PlayerVisual) -> CGFloat
+    
+    func playerVisualControlBarView(playerVisual: PlayerVisual) -> UIView?
+    
+    func playerVisualControlBarProgressPreferChange(playerVisual: PlayerVisual, currentTime: NSTimeInterval, maximumDuration: NSTimeInterval)
 }
 
 
@@ -45,15 +53,13 @@ public protocol PlayerVisualControlBarDelegate: NSObjectProtocol {
 
 public class PlayerVisual: Player, PlayerDelegate {
     
-    public weak var controlBarDelegate: PlayerVisualControlBarDelegate?
-    public weak var indictaorViewDelegate: PlayerVisualIndictaorViewDelegate?
+    public weak var visualDelegate: PlayerVisualViewDelegate?
     public var autoPlay: Bool = true
-    
     
     public convenience init() {
         self.init(nibName: nil, bundle: nil)
-        self.indictaor = PlayerVisualIndictaor()
-        self.indictaorViewDelegate = self.indictaor
+        self.visualDelegateDefault = PlayerVisualViewDefault()
+        self.visualDelegate = self.visualDelegateDefault
     }
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -67,8 +73,8 @@ public class PlayerVisual: Player, PlayerDelegate {
     }
     
     deinit {
-        controlBarDelegate = nil
-        indictaorViewDelegate = nil
+        addLayerToView(nil)
+        self.visualDelegate = nil
     }
     
     public override func addLayerToView(toView: UIView?) {
@@ -78,35 +84,65 @@ public class PlayerVisual: Player, PlayerDelegate {
             self.prepareComponent()
             
         } else {
+            self.placeHolderView = nil
+            self.controlBarView = nil
             self.indictaorView = nil
         }
     }
     
     
     // MARK: private
-    private var indictaor: PlayerVisualIndictaorViewDelegate?
-    private var indictaorView: UIView? {
+    
+    private var visualDelegateDefault: PlayerVisualViewDefault? = nil {
         didSet {
-            if indictaorView != oldValue {
-                oldValue?.removeFromSuperview()
-                
-                if nil != indictaorView {
-                    self.view.addSubview(indictaorView!)
+            if self.visualDelegateDefault != oldValue {
+                if nil != self.visualDelegateDefault && nil == self.visualDelegate {
+                    self.visualDelegate = self.visualDelegateDefault
                 }
             }
         }
     }
-    private var controlBar: PlayerVisualControlBarDelegate?
+    
+    private var placeHolderView: UIView? {
+        didSet {
+            if self.placeHolderView != oldValue {
+                oldValue?.removeFromSuperview()
+                
+                if nil != self.placeHolderView {
+                    self.view.addSubview(self.placeHolderView!)
+                }
+            }
+        }
+    }
+    
+    private var indictaorView: UIView? {
+        didSet {
+            if self.indictaorView != oldValue {
+                oldValue?.removeFromSuperview()
+                
+                if nil != self.indictaorView {
+                    self.view.addSubview(self.indictaorView!)
+                }
+            }
+        }
+    }
+    
     private var controlBarView: UIView? {
         didSet {
-            
+            if self.controlBarView != oldValue {
+                oldValue?.removeFromSuperview()
+                
+                if nil != self.controlBarView {
+                    self.view.addSubview(self.controlBarView!)
+                }
+            }
         }
     }
     
     private func prepareComponent() {
         self.prepareInteractive()
+        self.prepareHolderComponent()
         self.prepareControlBarComponent()
-        self.prepareIndictaorComponent()
     }
     
     private func prepareInteractive() {
@@ -115,12 +151,17 @@ public class PlayerVisual: Player, PlayerDelegate {
         self.view.addGestureRecognizer(tapGesture)
     }
     
-    private func prepareIndictaorComponent() {
-        self.indictaorView = self.indictaorViewDelegate?.indictaorViewStatuInit(self.view)
+    private func prepareHolderComponent() {
+        self.placeHolderView = self.visualDelegate?.playerVisualViewStatuInitWithPlaceHolder(self)
     }
     
     private func prepareControlBarComponent() {
         // TODO: Add control bar
+        let barHeight: CGFloat = self.visualDelegate?.playerVisualControlBarHeight(self) ?? 0
+        if let bar = self.visualDelegate?.playerVisualControlBarView(self) {
+            bar.frame = CGRectMake(0, self.view.bounds.height - barHeight, self.view.bounds.width, barHeight)
+            self.controlBarView = bar
+        }
     }
     
 }
@@ -131,12 +172,21 @@ extension PlayerVisual {
     
     func playerViewTapped() {
         if .Failed != self.playbackState {
-            if .Playing == self.playbackState {
-                self.pause()
+            if visualDelegate?.playerVisualViewTappedShouldPlay?(self) ?? false {
+                if .Playing != self.playbackState {
+                    self.playFromCurrentTime()
+                }
                 
             } else {
-                self.playFromCurrentTime()
+                if .Playing == self.playbackState {
+                    self.pause()
+                }
             }
+        }
+    }
+    
+    func playerViewSlided() {
+        if .Failed != self.playbackState {
         }
     }
 }
@@ -144,12 +194,14 @@ extension PlayerVisual {
 extension PlayerVisual {
 
     public func playerReady(player: Player) {
+        let readyView = self.visualDelegate?.playerVisualViewReadyToPlayWithPlaceHolder(self)
+        self.visualDelegate?.playerVisualControlBarProgressPreferChange(self, currentTime: player.currentTime, maximumDuration: player.maximumDuration)
         
         if self.autoPlay {
             player.playFromBeginning()
             
         } else {
-            self.indictaorView = self.indictaorViewDelegate?.indictaorViewReadyToPlay(self.view)
+            self.placeHolderView = readyView
         }
     }
     
@@ -158,16 +210,16 @@ extension PlayerVisual {
         switch player.playbackState {
             
         case .Some(.Failed):
-            self.indictaorView = self.indictaorViewDelegate?.indictaorViewFail(self.view)
+            self.placeHolderView = self.visualDelegate?.playerVisualViewFailWithPlaceHolder(self)
             
         case .Some(.Stopped):
-            self.indictaorView = self.indictaorViewDelegate?.indictaorViewStop(self.view)
+            self.placeHolderView = self.visualDelegate?.playerVisualViewStopWithPlaceHolder(self)
             
         case .Some(.Paused):
-            self.indictaorView = self.indictaorViewDelegate?.indictaorViewPause(self.view)
+            self.placeHolderView = self.visualDelegate?.playerVisualViewPauseWithPlaceHolder(self)
             
         case .Some(.Playing):
-            self.indictaorView = self.indictaorViewDelegate?.indictaorViewPlay(self.view)
+            self.placeHolderView = self.visualDelegate?.playerVisualViewPlayWithPlaceHolder(self)
             
         default:
             break
@@ -177,13 +229,13 @@ extension PlayerVisual {
     public func playerBufferingStateDidChange(player: Player) {
         switch player.bufferingState {
         case .None:
-            self.indictaorView = self.indictaorViewDelegate?.indictaorViewBufferError(self.view)
+            self.indictaorView = self.visualDelegate?.playerVisualIndictaorViewError(self)
             
         case .Some(.Delayed):
-            self.indictaorView = self.indictaorViewDelegate?.indictaorViewBufferDelay(self.view)
+            self.indictaorView = self.visualDelegate?.playerVisualIndictaorViewDelay(self)
             
         case .Some(.Ready):
-            self.indictaorView = self.indictaorViewDelegate?.indictaorViewBufferReady(self.view)
+            self.indictaorView = self.visualDelegate?.playerVisualIndictaorViewReady(self)
             
         default:
             break
@@ -191,6 +243,7 @@ extension PlayerVisual {
     }
     
     public func playerCurrentTimeDidChange(player: Player) {
+        self.visualDelegate?.playerVisualControlBarProgressPreferChange(self, currentTime: player.currentTime, maximumDuration: player.maximumDuration)
     }
     
     public func playerPlaybackWillStartFromBeginning(player: Player) {
@@ -199,6 +252,9 @@ extension PlayerVisual {
     
     public func playerPlaybackDidEnd(player: Player) {
         NSLog("\(#function)")
-        
+    }
+    
+    public func playerWillComeThroughLoop(player: Player) {
+        NSLog("\(#function)")
     }
 }

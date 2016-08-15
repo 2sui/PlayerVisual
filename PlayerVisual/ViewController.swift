@@ -20,7 +20,6 @@ class ViewController: UIViewController {
         
         self.view.autoresizingMask = [UIViewAutoresizing.FlexibleHeight, UIViewAutoresizing.FlexibleWidth]
         player.view.autoresizingMask = [UIViewAutoresizing.FlexibleHeight, UIViewAutoresizing.FlexibleWidth]
-        player.playbackEdgeTriggered = true
         player.autoPlay = false
         player.playbackLoops = false
     }
