@@ -247,14 +247,18 @@ extension PlayerVisual {
     }
     
     public func playerPlaybackWillStartFromBeginning(player: Player) {
-        NSLog("\(#function)")
     }
     
     public func playerPlaybackDidEnd(player: Player) {
-        NSLog("\(#function)")
     }
     
     public func playerWillComeThroughLoop(player: Player) {
-        NSLog("\(#function)")
+    }
+}
+
+extension PlayerView: PlayerVisualControlBarDelegate {
+    
+    func didSetToProgress(progress: Double) {
+        
     }
 }

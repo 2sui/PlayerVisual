@@ -21,6 +21,7 @@ class ViewController: UIViewController {
         self.view.autoresizingMask = [UIViewAutoresizing.FlexibleHeight, UIViewAutoresizing.FlexibleWidth]
         player.view.autoresizingMask = [UIViewAutoresizing.FlexibleHeight, UIViewAutoresizing.FlexibleWidth]
         player.autoPlay = false
+        player.bufferSize = 6 // cache 6s data
         player.playbackLoops = false
     }
 

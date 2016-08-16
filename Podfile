@@ -1,5 +1,3 @@
 use_frameworks!
 
-pod 'YYImage'
-
-
+pod 'SnapKit'
