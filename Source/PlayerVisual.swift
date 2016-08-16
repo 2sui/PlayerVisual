@@ -92,6 +92,7 @@ public class PlayerVisual: Player, PlayerDelegate {
     
     
     // MARK: private
+//    private var layerReady = false
     
     private var visualDelegateDefault: PlayerVisualViewDefault? = nil {
         didSet {
@@ -140,6 +141,7 @@ public class PlayerVisual: Player, PlayerDelegate {
     }
     
     private func prepareComponent() {
+        self.continuePlayAfterEnterForeground = false
         self.prepareInteractive()
         self.prepareHolderComponent()
         self.prepareControlBarComponent()

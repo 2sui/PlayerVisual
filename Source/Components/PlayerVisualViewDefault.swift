@@ -19,7 +19,11 @@ extension PlayerVisual: PlayerVisualControlBarDelegate {
     }
     
     public func playBottonDidTapped() {
-        if self.isPlaying {
+        guard .Failed != self.playbackState else {
+            return
+        }
+        
+        if .Playing == self.playbackState {
             self.pause()
             
         } else {
