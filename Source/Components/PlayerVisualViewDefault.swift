@@ -149,9 +149,6 @@ public class PlayerVisualViewDefault: NSObject, PlayerVisualViewDelegate {
 extension PlayerVisualViewDefault {
     
     public func playerVisualViewStatuInitWithPlaceHolder(playerVisual: PlayerVisual) -> UIView? {
-        // MARK: regist control bar delegate
-        playerVisual.registDelegateForPlayVisualControlBar(self.controlBar)
-        
         self.loadView.center = playerVisual.view.center
         return self.loadView
     }
@@ -159,6 +156,8 @@ extension PlayerVisualViewDefault {
     // ready to play
     public func playerVisualViewReadyToPlayWithPlaceHolder(playerVisual: PlayerVisual) -> UIView? {
         self.isReady = true
+        // MARK: regist control bar delegate
+        playerVisual.registDelegateForPlayVisualControlBar(self.controlBar)
         self.playIcon.center = playerVisual.view.center
         return self.playIcon
     }
@@ -204,7 +203,7 @@ extension PlayerVisualViewDefault {
             return false
         }
         
-        if self.controlBar.isBarHide && !self.controlBar.alwaysHideBar {
+        if self.controlBar.barIsHide && !self.controlBar.alwaysHideBar {
             self.controlBar.showControlBar(true)
             // if video is playing, just show the bar
             if self.isPlay {

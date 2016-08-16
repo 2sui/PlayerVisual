@@ -98,7 +98,11 @@ public class PlayerVisualControlBar: UIView {
     /// The time that bar will be hidden after shown.
     public var autoHideDelayTime: NSTimeInterval = 4
     /// Indicate that if the bar is shown.
-    public var isBarHide = false
+    public var barIsHide: Bool {
+        get {
+            return self.isBarHide
+        }
+    }
     
     /// Should hide Full screen button.
     public var hideFullScreenButton: Bool = false {
@@ -154,11 +158,7 @@ public class PlayerVisualControlBar: UIView {
         guard !self.isAnimating && !self.lockBar else {
             return
         }
-        
-        guard self.isBarHide else {
-            return
-        }
-        
+    
         self.barShow(autoHide)
     }
     
@@ -169,10 +169,6 @@ public class PlayerVisualControlBar: UIView {
      */
     public func hideControlBar(afterTime time: NSTimeInterval) {
         guard !self.isAnimating && !self.lockBar else {
-            return
-        }
-        
-        guard !self.isBarHide else {
             return
         }
         
@@ -228,6 +224,8 @@ public class PlayerVisualControlBar: UIView {
     private let slider = PlayerVisualControlSlider()
     private var barTimer: NSTimer?
     private var barMaxTime: Double = 0
+    private var sliderAcceptChange: Bool = false
+    private var isBarHide = false
     private var isAnimating = false
     
     private func contertTimevalToString(time: NSTimeInterval) -> String {
@@ -258,7 +256,7 @@ public class PlayerVisualControlBar: UIView {
     }
     
     private func setFullScreenIcon() {
-        self.fullScreenBtn.setImage(UIImage(named: "btn_pull_a"), forState: .Normal)
+        self.fullScreenBtn.setImage(UIImage(named: "btn_full_screen"), forState: .Normal)
     }
     
     private func prepareBar() {
@@ -300,6 +298,11 @@ public class PlayerVisualControlBar: UIView {
         self.fullScreenBtn.addTarget(self, action: #selector(fullScreenButtonTapped), forControlEvents: .TouchUpInside)
         self.setPlayBtnIconForStop()
         self.setFullScreenIcon()
+        
+        self.slider.addTarget(self, action: #selector(acceptSliderValueChange), forControlEvents: UIControlEvents.TouchDown)
+        self.slider.addTarget(self, action: #selector(rejectSliderValueChange), forControlEvents: UIControlEvents.TouchCancel)
+        self.slider.addTarget(self, action: #selector(rejectSliderValueChange), forControlEvents: UIControlEvents.TouchUpInside)
+        self.slider.addTarget(self, action: #selector(sliderValueChanged), forControlEvents: UIControlEvents.ValueChanged)
         
         self.playBtn.snp_makeConstraints {
             [unowned self] make in
@@ -345,7 +348,7 @@ public class PlayerVisualControlBar: UIView {
     private func hideBarWithTimer(interval: NSTimeInterval) {
         self.removeHideTimer()
         
-        if 0 == interval {
+        if 0 == interval || self.isBarHide {
             self.barHide(nil)
             return
         }
@@ -365,7 +368,7 @@ public class PlayerVisualControlBar: UIView {
     }
     
     func barShow(shouldHide: Bool) {
-        if 0 < self.animationDuration {
+        if 0 < self.animationDuration && self.isBarHide {
             self.isAnimating = true
             self.barLayer.hidden = false
             
@@ -461,5 +464,23 @@ public class PlayerVisualControlBar: UIView {
         
         self.hideControlBar(afterTime: self.autoHideDelayTime)
         self.delegate?.fullScreenBottonDidTapped?()
+    }
+    
+    func acceptSliderValueChange() {
+        self.sliderAcceptChange = true
+        self.showControlBar(false)
+    }
+    
+    func rejectSliderValueChange() {
+        self.sliderAcceptChange = false
+        self.hideControlBar(afterTime: self.autoHideDelayTime)
+    }
+    
+    func sliderValueChanged() {
+        if self.isAnimating || !self.sliderAcceptChange {
+            return
+        }
+        
+        self.delegate?.didSetToProgress?(0)
     }
 }
