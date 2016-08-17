@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2410C15C1D6458E700BB7E96"
+               BlueprintIdentifier = "2410C1EB1D64677E00BB7E96"
                BuildableName = "PlayerVisual.framework"
                BlueprintName = "PlayerVisual"
                ReferencedContainer = "container:PlayerVisual.xcodeproj">
@@ -28,21 +28,11 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2410C1661D6458E800BB7E96"
-               BuildableName = "PlayerVisualTests.xctest"
-               BlueprintName = "PlayerVisualTests"
-               ReferencedContainer = "container:PlayerVisual.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2410C15C1D6458E700BB7E96"
+            BlueprintIdentifier = "2410C1EB1D64677E00BB7E96"
             BuildableName = "PlayerVisual.framework"
             BlueprintName = "PlayerVisual"
             ReferencedContainer = "container:PlayerVisual.xcodeproj">
@@ -64,7 +54,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2410C15C1D6458E700BB7E96"
+            BlueprintIdentifier = "2410C1EB1D64677E00BB7E96"
             BuildableName = "PlayerVisual.framework"
             BlueprintName = "PlayerVisual"
             ReferencedContainer = "container:PlayerVisual.xcodeproj">
@@ -82,7 +72,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2410C15C1D6458E700BB7E96"
+            BlueprintIdentifier = "2410C1EB1D64677E00BB7E96"
             BuildableName = "PlayerVisual.framework"
             BlueprintName = "PlayerVisual"
             ReferencedContainer = "container:PlayerVisual.xcodeproj">

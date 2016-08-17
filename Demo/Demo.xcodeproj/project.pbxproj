@@ -14,6 +14,16 @@
 		2410BFFA1D64508800BB7E96 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2410BFF81D64508800BB7E96 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		248FB0A41D64766B00E198BF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 248FB09F1D64766B00E198BF /* PlayerVisual.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2410C1EC1D64677E00BB7E96;
+			remoteInfo = PlayerVisual;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		2410BFEC1D64508800BB7E96 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2410BFEF1D64508800BB7E96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -22,6 +32,7 @@
 		2410BFF61D64508800BB7E96 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2410BFF91D64508800BB7E96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2410BFFB1D64508800BB7E96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		248FB09F1D64766B00E198BF /* PlayerVisual.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PlayerVisual.xcodeproj; path = ../PlayerVisual.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +49,7 @@
 		2410BFE31D64508800BB7E96 = {
 			isa = PBXGroup;
 			children = (
+				248FB09F1D64766B00E198BF /* PlayerVisual.xcodeproj */,
 				2410BFEE1D64508800BB7E96 /* Demo */,
 				2410BFED1D64508800BB7E96 /* Products */,
 			);
@@ -62,6 +74,14 @@
 				2410BFFB1D64508800BB7E96 /* Info.plist */,
 			);
 			path = Demo;
+			sourceTree = "<group>";
+		};
+		248FB0A01D64766B00E198BF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				248FB0A51D64766B00E198BF /* PlayerVisual.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -111,12 +131,28 @@
 			mainGroup = 2410BFE31D64508800BB7E96;
 			productRefGroup = 2410BFED1D64508800BB7E96 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 248FB0A01D64766B00E198BF /* Products */;
+					ProjectRef = 248FB09F1D64766B00E198BF /* PlayerVisual.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				2410BFEB1D64508800BB7E96 /* Demo */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		248FB0A51D64766B00E198BF /* PlayerVisual.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PlayerVisual.framework;
+			remoteRef = 248FB0A41D64766B00E198BF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		2410BFEA1D64508800BB7E96 /* Resources */ = {

@@ -5,6 +5,7 @@
 
 import UIKit
 import CoreMedia
+import QPlayer
 
 
 // MARK: -
@@ -56,7 +57,7 @@ public protocol PlayerVisualDelegate: NSObjectProtocol {
 
 // MARK: PlayerVisual
 
-public class PlayerVisual: Player, PlayerDelegate {
+public class PlayerVisual: QPlayer, QPlayerDelegate {
     
     public convenience init() {
         self.init(nibName: nil, bundle: nil)

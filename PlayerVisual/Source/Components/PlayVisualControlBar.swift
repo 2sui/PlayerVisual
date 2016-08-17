@@ -2,8 +2,6 @@
 //  PlayVisualControlBar.swift
 //  PlayerVisual
 //
-//  Created by zm_iOS on 16/8/16.
-//  Copyright © 2016年 zm_iOS. All rights reserved.
 //
 
 import UIKit
