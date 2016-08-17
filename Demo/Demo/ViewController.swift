@@ -26,7 +26,10 @@ class ViewController: UIViewController, PlayerVisualDefaultDelegate {
         
         // set visual delegate before added to parent controller.
         player.visualDelegate = playerComponent
+        
         playerComponent.delegate = self
+        playerComponent.playIcon.image = UIImage(named: "btn_play_bg_a")
+        playerComponent.stopIcon.image = UIImage(named: "btn_pause_longmv_big_a")
         
         player.addToViewController(self, toView: videoView)
         
@@ -76,6 +79,23 @@ extension ViewController {
     
     func videoViewSizeChange(size: CGSize) {
         videoView.frame.size.height = self.view.frame.width * (size.height / size.width)
+    }
+    
+    
+    func controlBarPlayBottonImageForPlay() -> UIImage? {
+        return UIImage(named: "btn_pause_longmv_big_b")
+    }
+    
+    func controlBarPlayBottonImageForStop() -> UIImage? {
+        return UIImage(named: "btn_play_bg_b")
+    }
+    
+    func controlBarSliderThumbImage() -> UIImage? {
+        return UIImage(named: "icon_badge_bot")
+    }
+    
+    func controlBarFullScreenBottonImage() -> UIImage? {
+        return UIImage(named: "btn_full_screen")
     }
 }
 

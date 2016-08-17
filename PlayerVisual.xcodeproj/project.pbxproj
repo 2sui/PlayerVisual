@@ -11,7 +11,8 @@
 		248FB0B21D64773300E198BF /* PlayerVisual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248FB0B11D64773300E198BF /* PlayerVisual.swift */; };
 		248FB0B51D64774F00E198BF /* PlayerVisualViewDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248FB0B31D64774F00E198BF /* PlayerVisualViewDefault.swift */; };
 		248FB0B61D64774F00E198BF /* PlayVisualControlBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248FB0B41D64774F00E198BF /* PlayVisualControlBar.swift */; };
-		248FB0B81D64778C00E198BF /* Resource in Resources */ = {isa = PBXBuildFile; fileRef = 248FB0B71D64778C00E198BF /* Resource */; };
+		248FB0DD1D647A5000E198BF /* QPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 248FB0BE1D6478B600E198BF /* QPlayer.framework */; };
+		248FB0E51D647A5500E198BF /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 248FB0CA1D64799900E198BF /* SnapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -22,6 +23,69 @@
 			remoteGlobalIDString = 2410C2141D646EE200BB7E96;
 			remoteInfo = QPlayer;
 		};
+		248FB0C91D64799900E198BF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 248FB0BF1D64799900E198BF /* SnapKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EEBCC9D819CC627D0083B827;
+			remoteInfo = "SnapKit iOS";
+		};
+		248FB0CB1D64799900E198BF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 248FB0BF1D64799900E198BF /* SnapKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 537DCE921C35CC8800B5B899;
+			remoteInfo = "SnapKit tvOS";
+		};
+		248FB0CD1D64799900E198BF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 248FB0BF1D64799900E198BF /* SnapKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EECDB37A1AC0C9D4006BBC11;
+			remoteInfo = "SnapKit OSX";
+		};
+		248FB0CF1D64799900E198BF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 248FB0BF1D64799900E198BF /* SnapKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EEBCC9E219CC627E0083B827;
+			remoteInfo = "SnapKit iOS Tests";
+		};
+		248FB0D11D64799900E198BF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 248FB0BF1D64799900E198BF /* SnapKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 537DCEAF1C35D90A00B5B899;
+			remoteInfo = "SnapKit tvOS Tests";
+		};
+		248FB0D31D64799900E198BF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 248FB0BF1D64799900E198BF /* SnapKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EECDB3841AC0C9D4006BBC11;
+			remoteInfo = "SnapKit OSX Tests";
+		};
+		248FB0D51D64799900E198BF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 248FB0BF1D64799900E198BF /* SnapKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 56A0DC091C859E30005973AB;
+			remoteInfo = "Example-iOS";
+		};
+		24F0A2131D647B39004BEDDC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 248FB0B91D6478B600E198BF /* QPlayer.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2410C2131D646EE200BB7E96;
+			remoteInfo = QPlayer;
+		};
+		24F0A2151D647B3D004BEDDC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 248FB0BF1D64799900E198BF /* SnapKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = EEBCC9D719CC627D0083B827;
+			remoteInfo = "SnapKit iOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -31,8 +95,8 @@
 		248FB0B11D64773300E198BF /* PlayerVisual.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerVisual.swift; path = Source/PlayerVisual.swift; sourceTree = "<group>"; };
 		248FB0B31D64774F00E198BF /* PlayerVisualViewDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerVisualViewDefault.swift; path = Source/Components/PlayerVisualViewDefault.swift; sourceTree = "<group>"; };
 		248FB0B41D64774F00E198BF /* PlayVisualControlBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayVisualControlBar.swift; path = Source/Components/PlayVisualControlBar.swift; sourceTree = "<group>"; };
-		248FB0B71D64778C00E198BF /* Resource */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Resource; path = Source/Resource; sourceTree = "<group>"; };
 		248FB0B91D6478B600E198BF /* QPlayer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = QPlayer.xcodeproj; path = Submodules/QPlayer/Project/QPlayer.xcodeproj; sourceTree = "<group>"; };
+		248FB0BF1D64799900E198BF /* SnapKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SnapKit.xcodeproj; path = Submodules/SnapKit/SnapKit.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +104,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				248FB0E51D647A5500E198BF /* SnapKit.framework in Frameworks */,
+				248FB0DD1D647A5000E198BF /* QPlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,7 +132,6 @@
 		2410C1EE1D64677E00BB7E96 /* PlayerVisual */ = {
 			isa = PBXGroup;
 			children = (
-				248FB0B71D64778C00E198BF /* Resource */,
 				248FB0AF1D64771200E198BF /* Components */,
 				248FB0B11D64773300E198BF /* PlayerVisual.swift */,
 				2410C1EF1D64677E00BB7E96 /* PlayerVisual.h */,
@@ -78,6 +143,7 @@
 		248FB09E1D6475E800E198BF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				248FB0BF1D64799900E198BF /* SnapKit.xcodeproj */,
 				248FB0B91D6478B600E198BF /* QPlayer.xcodeproj */,
 			);
 			name = Frameworks;
@@ -96,6 +162,20 @@
 			isa = PBXGroup;
 			children = (
 				248FB0BE1D6478B600E198BF /* QPlayer.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		248FB0C01D64799900E198BF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				248FB0CA1D64799900E198BF /* SnapKit.framework */,
+				248FB0CC1D64799900E198BF /* SnapKit.framework */,
+				248FB0CE1D64799900E198BF /* SnapKit.framework */,
+				248FB0D01D64799900E198BF /* SnapKit iOS Tests.xctest */,
+				248FB0D21D64799900E198BF /* SnapKit tvOS Tests.xctest */,
+				248FB0D41D64799900E198BF /* SnapKit OSX Tests.xctest */,
+				248FB0D61D64799900E198BF /* Example-iOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -126,6 +206,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				24F0A2161D647B3D004BEDDC /* PBXTargetDependency */,
+				24F0A2141D647B39004BEDDC /* PBXTargetDependency */,
 			);
 			name = PlayerVisual;
 			productName = PlayerVisual;
@@ -163,6 +245,10 @@
 					ProductGroup = 248FB0BA1D6478B600E198BF /* Products */;
 					ProjectRef = 248FB0B91D6478B600E198BF /* QPlayer.xcodeproj */;
 				},
+				{
+					ProductGroup = 248FB0C01D64799900E198BF /* Products */;
+					ProjectRef = 248FB0BF1D64799900E198BF /* SnapKit.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -179,6 +265,55 @@
 			remoteRef = 248FB0BD1D6478B600E198BF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		248FB0CA1D64799900E198BF /* SnapKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SnapKit.framework;
+			remoteRef = 248FB0C91D64799900E198BF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		248FB0CC1D64799900E198BF /* SnapKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SnapKit.framework;
+			remoteRef = 248FB0CB1D64799900E198BF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		248FB0CE1D64799900E198BF /* SnapKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SnapKit.framework;
+			remoteRef = 248FB0CD1D64799900E198BF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		248FB0D01D64799900E198BF /* SnapKit iOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SnapKit iOS Tests.xctest";
+			remoteRef = 248FB0CF1D64799900E198BF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		248FB0D21D64799900E198BF /* SnapKit tvOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SnapKit tvOS Tests.xctest";
+			remoteRef = 248FB0D11D64799900E198BF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		248FB0D41D64799900E198BF /* SnapKit OSX Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SnapKit OSX Tests.xctest";
+			remoteRef = 248FB0D31D64799900E198BF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		248FB0D61D64799900E198BF /* Example-iOS.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "Example-iOS.app";
+			remoteRef = 248FB0D51D64799900E198BF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -186,7 +321,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				248FB0B81D64778C00E198BF /* Resource in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,6 +338,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		24F0A2141D647B39004BEDDC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = QPlayer;
+			targetProxy = 24F0A2131D647B39004BEDDC /* PBXContainerItemProxy */;
+		};
+		24F0A2161D647B3D004BEDDC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "SnapKit iOS";
+			targetProxy = 24F0A2151D647B3D004BEDDC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		2410C1FE1D64677E00BB7E96 /* Debug */ = {
@@ -308,7 +455,7 @@
 				INFOPLIST_FILE = PlayerVisual/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = zm.PlayerVisual;
+				PRODUCT_BUNDLE_IDENTIFIER = com.2sui.PlayerVisual;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -326,7 +473,7 @@
 				INFOPLIST_FILE = PlayerVisual/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = zm.PlayerVisual;
+				PRODUCT_BUNDLE_IDENTIFIER = com.2sui.PlayerVisual;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};

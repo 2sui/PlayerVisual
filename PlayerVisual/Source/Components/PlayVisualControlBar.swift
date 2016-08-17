@@ -13,12 +13,19 @@ import SnapKit
 // MARK: Player control bar slider
 
 public class PlayerVisualControlSlider: UISlider {
-    var thumbImg: UIImage?
+    public var thumbImage: UIImage? {
+        set {
+            self.setThumbImage(newValue, forState: .Normal)
+        }
+        
+        get {
+            return self.currentThumbImage
+        }
+    }
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        self.thumbImg = UIImage(named: "icon_badge_bot")
-        self.setThumbImage(self.thumbImg, forState: .Normal)
+        self.thumbImage = UIImage(named: "icon_badge_bot")
     }
     
     public required init?(coder aDecoder: NSCoder) {
@@ -34,7 +41,7 @@ public class PlayerVisualControlSlider: UISlider {
     // thumb bounds
     public override func thumbRectForBounds(bounds: CGRect, trackRect rect: CGRect, value: Float) -> CGRect {
         let thumbBounds = super.thumbRectForBounds(bounds, trackRect: rect, value: value)
-        let thumbHeight = (self.thumbImg?.size.width ?? 0)
+        let thumbHeight = (self.thumbImage?.size.width ?? 0)
         return CGRectMake(thumbBounds.origin.x, (bounds.size.height - thumbHeight) / 2, thumbHeight, thumbHeight)
     }
 }
@@ -52,6 +59,14 @@ public protocol PlayerVisualControlBarDelegate: NSObjectProtocol {
     optional func controlBarPlayBottonDidTapped()
     
     optional func controlBarFullScreenBottonDidTapped()
+    
+    optional func controlBarPlayBottonImageForPlay() -> UIImage?
+    
+    optional func controlBarPlayBottonImageForStop() -> UIImage?
+    
+    optional func controlBarSliderThumbImage() -> UIImage?
+    
+    optional func controlBarFullScreenBottonImage() -> UIImage?
     
 }
 
@@ -99,6 +114,33 @@ public class PlayerVisualControlBar: UIView {
     public var barIsHide: Bool {
         get {
             return self.isBarHide
+        }
+    }
+    
+    /// Play botton image for `Play` stat
+    public var playButtonImageForPlay: UIImage?
+    /// Play botton image for `Stop/Pause` stat
+    public var playButtonImageForStop: UIImage?
+    
+    /// Slider thumb image
+    public var sliderThumbImage: UIImage? {
+        get {
+            return self.slider.thumbImage
+        }
+        
+        set {
+            self.slider.thumbImage = newValue
+        }
+    }
+    
+    /// Full screen button image
+    public var fullScreenImage: UIImage? {
+        get {
+            return self.fullScreenBtn.backgroundImageForState(.Normal)
+        }
+        
+        set {
+            self.fullScreenBtn.setBackgroundImage(newValue, forState: .Normal)
         }
     }
     
@@ -214,6 +256,22 @@ public class PlayerVisualControlBar: UIView {
      Layout bar components.
      */
     public func layoutBarViews() {
+        self.playButtonImageForStop = self.delegate?.controlBarPlayBottonImageForStop?()
+        self.playButtonImageForPlay = self.delegate?.controlBarPlayBottonImageForPlay?()
+        self.sliderThumbImage = self.delegate?.controlBarSliderThumbImage?()
+        self.fullScreenImage = self.delegate?.controlBarFullScreenBottonImage?()
+        
+        self.maxTimeLabel.text = self.contertTimevalToString(0)
+        self.maxTimeLabel.textColor =  UIColor(red: 0.8494, green: 0.8494, blue: 0.8494, alpha: 1.0)
+        self.maxTimeLabel.textAlignment = .Center
+        self.maxTimeLabel.font = UIFont(name: "Helvetica", size: 10)
+        self.currentTimeLabel.text = self.maxTimeLabel.text
+        self.currentTimeLabel.textColor = self.maxTimeLabel.textColor
+        self.currentTimeLabel.textAlignment = self.maxTimeLabel.textAlignment
+        self.currentTimeLabel.font = self.maxTimeLabel.font
+        
+        self.setPlayBtnIconForStop()
+        
         self.playBtn.snp_makeConstraints {
             [unowned self] make in
             make.left.equalTo(self.barLayer).offset(self.inset.left)
@@ -257,13 +315,13 @@ public class PlayerVisualControlBar: UIView {
     
     // MARK: - Private
     
-    private let progress = UIProgressView(progressViewStyle: .Bar)
-    private let barLayer = UIView(frame: CGRectZero)
     private let playBtn = UIButton(frame: CGRectZero)
     private let fullScreenBtn = UIButton(frame: CGRectZero)
     private let currentTimeLabel = UILabel(frame: CGRectZero)
     private let maxTimeLabel = UILabel(frame: CGRectZero)
     private let slider = PlayerVisualControlSlider()
+    private let progress = UIProgressView(progressViewStyle: .Bar)
+    private let barLayer = UIView(frame: CGRectZero)
     private var barTimer: NSTimer?
     private var barMaxTime: Double = 0
     private var sliderAcceptChange: Bool = false
@@ -290,15 +348,11 @@ public class PlayerVisualControlBar: UIView {
     }
     
     private func setPlayBtnIconForPlay() {
-        self.playBtn.setImage(UIImage(named: "btn_pause_longmv_a"), forState: .Normal)
+        self.playBtn.setImage(self.playButtonImageForPlay, forState: .Normal)
     }
     
     private func setPlayBtnIconForStop() {
-        self.playBtn.setImage(UIImage(named: "btn_play_bg_a"), forState: .Normal)
-    }
-    
-    private func setFullScreenIcon() {
-        self.fullScreenBtn.setImage(UIImage(named: "btn_full_screen"), forState: .Normal)
+        self.playBtn.setImage(self.playButtonImageForStop, forState: .Normal)
     }
     
     private func prepareBar() {
@@ -327,19 +381,8 @@ public class PlayerVisualControlBar: UIView {
         self.barLayer.addSubview(self.maxTimeLabel)
         self.barLayer.addSubview(self.slider)
         
-        self.maxTimeLabel.text = self.contertTimevalToString(0)
-        self.maxTimeLabel.textColor =  UIColor(red: 0.8494, green: 0.8494, blue: 0.8494, alpha: 1.0)
-        self.maxTimeLabel.textAlignment = .Center
-        self.maxTimeLabel.font = UIFont(name: "Helvetica", size: 10)
-        self.currentTimeLabel.text = self.maxTimeLabel.text
-        self.currentTimeLabel.textColor = self.maxTimeLabel.textColor
-        self.currentTimeLabel.textAlignment = self.maxTimeLabel.textAlignment
-        self.currentTimeLabel.font = self.maxTimeLabel.font
-        
         self.playBtn.addTarget(self, action: #selector(playButtonTapped), forControlEvents: .TouchUpInside)
         self.fullScreenBtn.addTarget(self, action: #selector(fullScreenButtonTapped), forControlEvents: .TouchUpInside)
-        self.setPlayBtnIconForStop()
-        self.setFullScreenIcon()
         
         self.slider.addTarget(self, action: #selector(acceptSliderValueChange), forControlEvents: UIControlEvents.TouchDown)
         self.slider.addTarget(self, action: #selector(rejectSliderValueChange), forControlEvents: UIControlEvents.TouchCancel)
@@ -488,5 +531,22 @@ public class PlayerVisualControlBar: UIView {
         }
         
         self.delegate?.controlBarDidSlideToValue?(Double(self.slider.value))
+    }
+    
+    
+    internal func controlBarPlayBottonImageForPlay() -> UIImage? {
+        return self.delegate?.controlBarPlayBottonImageForPlay?()
+    }
+    
+    internal func controlBarPlayBottonImageForStop() -> UIImage? {
+        return self.delegate?.controlBarPlayBottonImageForStop?()
+    }
+    
+    internal func controlBarSliderThumbImage() -> UIImage? {
+        return self.delegate?.controlBarSliderThumbImage?()
+    }
+    
+    internal func controlBarFullScreenBottonImage() -> UIImage? {
+        return self.delegate?.controlBarFullScreenBottonImage?()
     }
 }

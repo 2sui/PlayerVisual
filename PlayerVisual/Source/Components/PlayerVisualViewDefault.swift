@@ -52,15 +52,14 @@ public class PlayerVisualViewDefault: NSObject, PlayerVisualDelegate, PlayerVisu
             self.controlBar.hideFullScreenButton = newValue
         }
     }
-    
+        
+    public let playIcon = UIImageView(frame: CGRectMake(0, 0, 100, 100))
+    public let stopIcon = UIImageView(frame: CGRectMake(0, 0, 100, 100))
+    public let loadView = UILabel(frame: CGRectMake(0, 0, 300, 50))
+    public let failView = UILabel(frame: CGRectMake(0, 0, 320, 50))
+    public let indictaor = UIActivityIndicatorView(frame: CGRectMake(0, 0, 40, 40))
     
     // MARK: - Private
-    
-    private let playIcon = UIImageView(frame: CGRectMake(0, 0, 100, 100))
-    private let stopIcon = UIImageView(frame: CGRectMake(0, 0, 100, 100))
-    private let loadView = UILabel(frame: CGRectMake(0, 0, 300, 50))
-    private let failView = UILabel(frame: CGRectMake(0, 0, 320, 50))
-    private let indictaor = UIActivityIndicatorView(frame: CGRectMake(0, 0, 40, 40))
     private let controlBar = PlayerVisualControlBar(frame: CGRectMake(0, 0, 100, 50)) // the frame is just used for layout
     
     private var isReady = false {
@@ -106,9 +105,6 @@ public class PlayerVisualViewDefault: NSObject, PlayerVisualDelegate, PlayerVisu
     private var lastBarProgressUpdate: NSTimeInterval = 0
     
     private func prepareIndictaorViews() {
-        self.playIcon.image = UIImage(named: "btn_play_bg_a")
-        self.stopIcon.image = UIImage(named: "btn_pause_longmv_big_a")
-        
         self.playIcon.autoresizingMask = [UIViewAutoresizing.FlexibleLeftMargin, UIViewAutoresizing.FlexibleTopMargin, UIViewAutoresizing.FlexibleRightMargin, UIViewAutoresizing.FlexibleBottomMargin]
         self.stopIcon.autoresizingMask = [UIViewAutoresizing.FlexibleLeftMargin, UIViewAutoresizing.FlexibleTopMargin, UIViewAutoresizing.FlexibleRightMargin, UIViewAutoresizing.FlexibleBottomMargin]
         
@@ -125,6 +121,7 @@ public class PlayerVisualViewDefault: NSObject, PlayerVisualDelegate, PlayerVisu
         self.loadView.autoresizingMask = [UIViewAutoresizing.FlexibleLeftMargin, UIViewAutoresizing.FlexibleTopMargin, UIViewAutoresizing.FlexibleRightMargin, UIViewAutoresizing.FlexibleBottomMargin]
         
         self.controlBar.autoresizingMask = [UIViewAutoresizing.FlexibleTopMargin, UIViewAutoresizing.FlexibleBottomMargin, UIViewAutoresizing.FlexibleWidth]
+        self.controlBar.delegate = self
     }
 }
 

@@ -215,7 +215,7 @@ extension PlayerVisual {
 
 extension PlayerVisual {
 
-    public func playerReady(player: Player) {
+    public func playerReady(player: QPlayer) {
         self.visualDelegate?.playerVisualVideoSizeChange(self, size: self.naturalSize)
         self.visualDelegate?.playerVisualControlBarProgressPreferChange(self, currentTime: player.currentTime, maximumDuration: player.maximumDuration)
         let readyView = self.visualDelegate?.playerVisualReadyToPlayWithPlaceHolder(self)
@@ -228,7 +228,7 @@ extension PlayerVisual {
         }
     }
     
-    public func playerPlaybackStateDidChange(player: Player) {
+    public func playerPlaybackStateDidChange(player: QPlayer) {
         
         switch player.playbackState {
             
@@ -249,7 +249,7 @@ extension PlayerVisual {
         }
     }
     
-    public func playerBufferingStateDidChange(player: Player) {
+    public func playerBufferingStateDidChange(player: QPlayer) {
         switch player.bufferingState {
         case .None:
             self.indictaorView = self.visualDelegate?.playerVisualIndictaorViewError(self)
@@ -265,17 +265,17 @@ extension PlayerVisual {
         }
     }
     
-    public func playerCurrentTimeDidChange(player: Player) {
+    public func playerCurrentTimeDidChange(player: QPlayer) {
         self.visualDelegate?.playerVisualControlBarProgressPreferChange(self, currentTime: player.currentTime, maximumDuration: player.maximumDuration)
     }
     
-    public func playerPlaybackWillStartFromBeginning(player: Player) {
+    public func playerPlaybackWillStartFromBeginning(player: QPlayer) {
     }
     
-    public func playerPlaybackDidEnd(player: Player) {
+    public func playerPlaybackDidEnd(player: QPlayer) {
     }
     
-    public func playerWillComeThroughLoop(player: Player) {
+    public func playerWillComeThroughLoop(player: QPlayer) {
     }
 }
 
