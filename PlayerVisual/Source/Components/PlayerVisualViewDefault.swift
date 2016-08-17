@@ -31,7 +31,12 @@ public class PlayerVisualViewDefault: NSObject, PlayerVisualDelegate, PlayerVisu
     
     // MARK: - Public
     
-    public weak var delegate: PlayerVisualDefaultDelegate?
+    public weak var delegate: PlayerVisualDefaultDelegate? {
+        didSet {
+            self.controlBar.delegate = self
+        }
+    }
+    
     public var barProgressResolution: NSTimeInterval = 1
     public var alwaysHideBar: Bool {
         get {
@@ -121,7 +126,6 @@ public class PlayerVisualViewDefault: NSObject, PlayerVisualDelegate, PlayerVisu
         self.loadView.autoresizingMask = [UIViewAutoresizing.FlexibleLeftMargin, UIViewAutoresizing.FlexibleTopMargin, UIViewAutoresizing.FlexibleRightMargin, UIViewAutoresizing.FlexibleBottomMargin]
         
         self.controlBar.autoresizingMask = [UIViewAutoresizing.FlexibleTopMargin, UIViewAutoresizing.FlexibleBottomMargin, UIViewAutoresizing.FlexibleWidth]
-        self.controlBar.delegate = self
     }
 }
 
@@ -141,9 +145,6 @@ extension PlayerVisualViewDefault {
     // ready to play
     public func playerVisualReadyToPlayWithPlaceHolder(playerVisual: PlayerVisual) -> UIView? {
         self.isReady = true
-        
-        // MARK: set control bar delegate on ready.
-        self.controlBar.delegate = self
         
         self.playIcon.center = playerVisual.view.center
         self.playIcon.autoresizingMask = [UIViewAutoresizing.FlexibleBottomMargin, UIViewAutoresizing.FlexibleLeftMargin, UIViewAutoresizing.FlexibleTopMargin, UIViewAutoresizing.FlexibleRightMargin]
@@ -275,15 +276,38 @@ extension PlayerVisualViewDefault {
     
     // MARK: - bar delegate
     public func controlBarDidSlideToValue(value: Double) {
-        self.delegate?.controlBarDidSlideToValue?(value)
+        guard self.isReady else {
+            return
+        }
+        self.delegate?.controlBarDidSlideToValue(value)
     }
     
     public func controlBarPlayBottonDidTapped() {
-        self.delegate?.controlBarPlayBottonDidTapped?()
+        guard self.isReady else {
+            return
+        }
+        self.delegate?.controlBarPlayBottonDidTapped()
     }
     
     public func controlBarFullScreenBottonDidTapped() {
-        self.delegate?.controlBarFullScreenBottonDidTapped?()
+        self.delegate?.controlBarFullScreenBottonDidTapped()
+    }
+    
+    
+    public func controlBarPlayBottonImageForPlay() -> UIImage? {
+        return self.delegate?.controlBarPlayBottonImageForPlay()
+    }
+    
+    public func controlBarPlayBottonImageForStop() -> UIImage? {
+        return self.delegate?.controlBarPlayBottonImageForStop()
+    }
+    
+    public func controlBarSliderThumbImage() -> UIImage? {
+        return self.delegate?.controlBarSliderThumbImage()
+    }
+    
+    public func controlBarFullScreenBottonImage() -> UIImage? {
+        return self.delegate?.controlBarFullScreenBottonImage()
     }
 }
 

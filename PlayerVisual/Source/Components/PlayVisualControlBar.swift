@@ -54,19 +54,19 @@ public class PlayerVisualControlSlider: UISlider {
 @objc
 public protocol PlayerVisualControlBarDelegate: NSObjectProtocol {
     
-    optional func controlBarDidSlideToValue(value: Double)
+    func controlBarDidSlideToValue(value: Double)
     
-    optional func controlBarPlayBottonDidTapped()
+    func controlBarPlayBottonDidTapped()
     
-    optional func controlBarFullScreenBottonDidTapped()
+    func controlBarFullScreenBottonDidTapped()
     
-    optional func controlBarPlayBottonImageForPlay() -> UIImage?
+    func controlBarPlayBottonImageForPlay() -> UIImage?
     
-    optional func controlBarPlayBottonImageForStop() -> UIImage?
+    func controlBarPlayBottonImageForStop() -> UIImage?
     
-    optional func controlBarSliderThumbImage() -> UIImage?
+    func controlBarSliderThumbImage() -> UIImage?
     
-    optional func controlBarFullScreenBottonImage() -> UIImage?
+    func controlBarFullScreenBottonImage() -> UIImage?
     
 }
 
@@ -101,11 +101,22 @@ public class PlayerVisualControlBar: UIView {
     // MARK: - Public
     
     /// delegate of PlayerVisualControlBar, which will recive bar bottons touching events and bar slider events.
-    public weak var delegate: PlayerVisualControlBarDelegate?
+    public weak var delegate: PlayerVisualControlBarDelegate? {
+        didSet {
+            self.playButtonImageForStop = self.delegate?.controlBarPlayBottonImageForStop()
+            self.playButtonImageForPlay = self.delegate?.controlBarPlayBottonImageForPlay()
+            self.sliderThumbImage = self.delegate?.controlBarSliderThumbImage()
+            self.fullScreenImage = self.delegate?.controlBarFullScreenBottonImage()
+        }
+    }
     /// Inset of bar content.
-    public var inset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+    public var itemMarginLeft: CGFloat = 8
+    public var itemMarginRight: CGFloat = 8
+    public var itemSpace: CGFloat = 5
+    public var timeLabelSize: CGSize = CGSize(width: 36, height: 20)
+    public var playBottonSize: CGSize = CGSize(width: 25, height: 25)
+    public var fullScreenButtonSize: CGSize = CGSize(width: 20, height: 20)
     /// Items space.
-    public var itemSpace: CGFloat = 8
     /// Duration of animation.(Set 0 to disable animation.)
     public var animationDuration: NSTimeInterval = 0.5
     /// The time that bar will be hidden after shown.
@@ -118,9 +129,21 @@ public class PlayerVisualControlBar: UIView {
     }
     
     /// Play botton image for `Play` stat
-    public var playButtonImageForPlay: UIImage?
+    public var playButtonImageForPlay: UIImage? {
+        didSet {
+            if self.isPlayBottonPlay {
+                self.setPlayBtnIconForPlay()
+            }
+        }
+    }
     /// Play botton image for `Stop/Pause` stat
-    public var playButtonImageForStop: UIImage?
+    public var playButtonImageForStop: UIImage? {
+        didSet {
+            if !self.isPlayBottonPlay {
+                self.setPlayBtnIconForStop()
+            }
+        }
+    }
     
     /// Slider thumb image
     public var sliderThumbImage: UIImage? {
@@ -151,19 +174,19 @@ public class PlayerVisualControlBar: UIView {
                 if self.hideFullScreenButton {
                     self.fullScreenBtn.snp_remakeConstraints {
                         [unowned self] make in
-                        make.right.equalTo(self.barLayer)
+                        make.right.equalTo(self.barLayer).offset(self.itemMarginRight * (-1))
                         make.centerY.equalTo(self.playBtn)
-                        make.height.equalTo(self.playBtn)
+                        make.height.equalTo(self.fullScreenButtonSize.height)
                         make.width.equalTo(0)
                     }
                     
                 } else {
                     self.fullScreenBtn.snp_makeConstraints {
                         [unowned self] make in
-                        make.right.equalTo(self.barLayer).offset(self.inset.right * (-1))
+                        make.right.equalTo(self.barLayer).offset(self.itemMarginRight * (-1))
                         make.centerY.equalTo(self.playBtn)
-                        make.height.equalTo(self.playBtn)
-                        make.width.equalTo(self.playBtn)
+                        make.height.equalTo(self.fullScreenButtonSize.height)
+                        make.width.equalTo(self.fullScreenButtonSize.width)
                     }
                 }
             }
@@ -256,11 +279,6 @@ public class PlayerVisualControlBar: UIView {
      Layout bar components.
      */
     public func layoutBarViews() {
-        self.playButtonImageForStop = self.delegate?.controlBarPlayBottonImageForStop?()
-        self.playButtonImageForPlay = self.delegate?.controlBarPlayBottonImageForPlay?()
-        self.sliderThumbImage = self.delegate?.controlBarSliderThumbImage?()
-        self.fullScreenImage = self.delegate?.controlBarFullScreenBottonImage?()
-        
         self.maxTimeLabel.text = self.contertTimevalToString(0)
         self.maxTimeLabel.textColor =  UIColor(red: 0.8494, green: 0.8494, blue: 0.8494, alpha: 1.0)
         self.maxTimeLabel.textAlignment = .Center
@@ -274,26 +292,26 @@ public class PlayerVisualControlBar: UIView {
         
         self.playBtn.snp_makeConstraints {
             [unowned self] make in
-            make.left.equalTo(self.barLayer).offset(self.inset.left)
+            make.left.equalTo(self.barLayer).offset(self.itemMarginLeft)
             make.centerY.equalTo(self.barLayer)
-            make.height.equalTo(30)
-            make.width.equalTo(30)
+            make.height.equalTo(self.playBottonSize.height)
+            make.width.equalTo(self.playBottonSize.width)
         }
         
         self.fullScreenBtn.snp_makeConstraints {
             [unowned self] make in
-            make.right.equalTo(self.barLayer).offset(self.inset.right * (-1))
+            make.right.equalTo(self.barLayer).offset(self.itemMarginRight * (-1))
             make.centerY.equalTo(self.playBtn)
-            make.height.equalTo(self.playBtn)
-            make.width.equalTo(self.playBtn)
+            make.height.equalTo(self.fullScreenButtonSize.height)
+            make.width.equalTo(self.fullScreenButtonSize.width)
         }
         
         self.currentTimeLabel.snp_makeConstraints {
             [unowned self] make in
             make.left.equalTo(self.playBtn.snp_right).offset(self.itemSpace)
             make.centerY.equalTo(self.playBtn)
-            make.height.equalTo(20)
-            make.width.equalTo(36)
+            make.height.equalTo(self.timeLabelSize.height)
+            make.width.equalTo(self.timeLabelSize.width)
         }
         
         self.maxTimeLabel.snp_makeConstraints {
@@ -308,7 +326,7 @@ public class PlayerVisualControlBar: UIView {
             [unowned self] make in
             make.left.equalTo(self.currentTimeLabel.snp_right).offset(self.itemSpace)
             make.right.equalTo(self.maxTimeLabel.snp_left).offset(self.itemSpace * (-1))
-            make.centerY.equalTo(self.playBtn)
+            make.centerY.equalTo(self.currentTimeLabel)
             make.height.equalTo(self.currentTimeLabel)
         }
     }
@@ -325,6 +343,7 @@ public class PlayerVisualControlBar: UIView {
     private var barTimer: NSTimer?
     private var barMaxTime: Double = 0
     private var sliderAcceptChange: Bool = false
+    private var isPlayBottonPlay = false
     private var isBarHide = false
     private var isAnimating = false
     
@@ -349,10 +368,12 @@ public class PlayerVisualControlBar: UIView {
     
     private func setPlayBtnIconForPlay() {
         self.playBtn.setImage(self.playButtonImageForPlay, forState: .Normal)
+        self.isPlayBottonPlay = true
     }
     
     private func setPlayBtnIconForStop() {
         self.playBtn.setImage(self.playButtonImageForStop, forState: .Normal)
+        self.isPlayBottonPlay = false
     }
     
     private func prepareBar() {
@@ -503,7 +524,7 @@ public class PlayerVisualControlBar: UIView {
         }
         
         self.hideControlBar(afterTime: self.autoHideDelayTime)
-        self.delegate?.controlBarPlayBottonDidTapped?()
+        self.delegate?.controlBarPlayBottonDidTapped()
     }
     
     internal func fullScreenButtonTapped() {
@@ -512,7 +533,7 @@ public class PlayerVisualControlBar: UIView {
         }
         
         self.hideControlBar(afterTime: self.autoHideDelayTime)
-        self.delegate?.controlBarFullScreenBottonDidTapped?()
+        self.delegate?.controlBarFullScreenBottonDidTapped()
     }
     
     internal func acceptSliderValueChange() {
@@ -530,23 +551,6 @@ public class PlayerVisualControlBar: UIView {
             return
         }
         
-        self.delegate?.controlBarDidSlideToValue?(Double(self.slider.value))
-    }
-    
-    
-    internal func controlBarPlayBottonImageForPlay() -> UIImage? {
-        return self.delegate?.controlBarPlayBottonImageForPlay?()
-    }
-    
-    internal func controlBarPlayBottonImageForStop() -> UIImage? {
-        return self.delegate?.controlBarPlayBottonImageForStop?()
-    }
-    
-    internal func controlBarSliderThumbImage() -> UIImage? {
-        return self.delegate?.controlBarSliderThumbImage?()
-    }
-    
-    internal func controlBarFullScreenBottonImage() -> UIImage? {
-        return self.delegate?.controlBarFullScreenBottonImage?()
+        self.delegate?.controlBarDidSlideToValue(Double(self.slider.value))
     }
 }

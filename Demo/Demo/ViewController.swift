@@ -11,7 +11,7 @@ import PlayerVisual
 
 class ViewController: UIViewController, PlayerVisualDefaultDelegate {
     let videoView = UIView()
-    var player: PlayerVisual!
+    let player = PlayerVisual()
     var playerComponent: PlayerVisualViewDefault!
 
     override func viewDidLoad() {
@@ -21,13 +21,14 @@ class ViewController: UIViewController, PlayerVisualDefaultDelegate {
         videoView.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.width)
         self.view.addSubview(videoView)
         
-        player = PlayerVisual()
         playerComponent = PlayerVisualViewDefault()
         
         // set visual delegate before added to parent controller.
         player.visualDelegate = playerComponent
         
         playerComponent.delegate = self
+//        playerComponent.alwaysHideBar = true
+        playerComponent.hideFullScreenBotton = true
         playerComponent.playIcon.image = UIImage(named: "btn_play_bg_a")
         playerComponent.stopIcon.image = UIImage(named: "btn_pause_longmv_big_a")
         
@@ -95,7 +96,7 @@ extension ViewController {
     }
     
     func controlBarFullScreenBottonImage() -> UIImage? {
-        return UIImage(named: "btn_full_screen")
+        return UIImage(named: "btn_full_screen@3x")
     }
 }
 
