@@ -8,48 +8,31 @@ import UIKit
 
 // MARK: -
 
-// MARK: PlayerVisual extension
-extension PlayerVisual: PlayerVisualControlBarDelegate {
+// MARK: - PlayerVisualDefaultDelegate
+
+@objc
+public protocol PlayerVisualDefaultDelegate: PlayerVisualControlBarDelegate {
     
-    public func registDelegateForPlayVisualControlBar(bar: PlayerVisualControlBar) {
-        bar.delegate = self
-    }
+    optional func videoViewSizeChange(size: CGSize)
     
-    public func didSetToProgress(progress: Double) {
-    }
-    
-    public func playBottonDidTapped() {
-        guard .Failed != self.playbackState else {
-            return
-        }
-        
-        if .Playing == self.playbackState {
-            self.pause()
-            
-        } else {
-            self.playFromCurrentTime()
-        }
-    }
-    
-    public func fullScreenBottonDidTapped() {
-    }
 }
 
 
 // MARK: -
 
-// MARK: PlayerVisualViewDefault
+// MARK: PlayerVisualDefault
 
-public class PlayerVisualViewDefault: NSObject, PlayerVisualDelegate {
-    public var barProgressResolution: NSTimeInterval = 1
+public class PlayerVisualViewDefault: NSObject, PlayerVisualDelegate, PlayerVisualControlBarDelegate {
     
     public override init() {
         super.init()
         self.prepareIndictaorViews()
     }
     
-    // MARK: - public 
+    // MARK: - Public
     
+    public weak var delegate: PlayerVisualDefaultDelegate?
+    public var barProgressResolution: NSTimeInterval = 1
     public var alwaysHideBar: Bool {
         get {
             return self.controlBar.alwaysHideBar
@@ -71,15 +54,15 @@ public class PlayerVisualViewDefault: NSObject, PlayerVisualDelegate {
     }
     
     
-    // MARK: - private
+    // MARK: - Private
     
     private let playIcon = UIImageView(frame: CGRectMake(0, 0, 100, 100))
     private let stopIcon = UIImageView(frame: CGRectMake(0, 0, 100, 100))
     private let loadView = UILabel(frame: CGRectMake(0, 0, 300, 50))
     private let failView = UILabel(frame: CGRectMake(0, 0, 320, 50))
     private let indictaor = UIActivityIndicatorView(frame: CGRectMake(0, 0, 40, 40))
-    private let controlBar = PlayerVisualControlBar(frame: CGRectMake(0, 0, 100, 50)) // the frame just used for layout
-    private var indictaorPreferAnimating = false
+    private let controlBar = PlayerVisualControlBar(frame: CGRectMake(0, 0, 100, 50)) // the frame is just used for layout
+    
     private var isReady = false {
         didSet {
             if self.isReady {
@@ -152,22 +135,26 @@ public class PlayerVisualViewDefault: NSObject, PlayerVisualDelegate {
 
 extension PlayerVisualViewDefault {
     
-    public func playerVisualViewStatuInitWithPlaceHolder(playerVisual: PlayerVisual) -> UIView? {
+    public func playerVisualStatuInitWithPlaceHolder(playerVisual: PlayerVisual) -> UIView? {
         self.loadView.center = playerVisual.view.center
+        self.loadView.autoresizingMask = [UIViewAutoresizing.FlexibleBottomMargin, UIViewAutoresizing.FlexibleLeftMargin, UIViewAutoresizing.FlexibleTopMargin, UIViewAutoresizing.FlexibleRightMargin]
         return self.loadView
     }
     
     // ready to play
-    public func playerVisualViewReadyToPlayWithPlaceHolder(playerVisual: PlayerVisual) -> UIView? {
+    public func playerVisualReadyToPlayWithPlaceHolder(playerVisual: PlayerVisual) -> UIView? {
         self.isReady = true
-        // MARK: regist control bar delegate
-        playerVisual.registDelegateForPlayVisualControlBar(self.controlBar)
+        
+        // MARK: set control bar delegate on ready.
+        self.controlBar.delegate = self
+        
         self.playIcon.center = playerVisual.view.center
+        self.playIcon.autoresizingMask = [UIViewAutoresizing.FlexibleBottomMargin, UIViewAutoresizing.FlexibleLeftMargin, UIViewAutoresizing.FlexibleTopMargin, UIViewAutoresizing.FlexibleRightMargin]
         return self.playIcon
     }
     
     // play
-    public func playerVisualViewPlayWithPlaceHolder(playerVisual: PlayerVisual) -> UIView? {
+    public func playerVisualPlayWithPlaceHolder(playerVisual: PlayerVisual) -> UIView? {
         guard self.isReady else {
             return nil
         }
@@ -177,32 +164,36 @@ extension PlayerVisualViewDefault {
     }
     
     // pause
-    public func playerVisualViewPauseWithPlaceHolder(playerVisual: PlayerVisual) -> UIView? {
+    public func playerVisualPauseWithPlaceHolder(playerVisual: PlayerVisual) -> UIView? {
         guard self.isPlay else {
             return nil
         }
         
         self.isPlay = false
         self.stopIcon.center = playerVisual.view.center
+        self.stopIcon.autoresizingMask = [UIViewAutoresizing.FlexibleBottomMargin, UIViewAutoresizing.FlexibleLeftMargin, UIViewAutoresizing.FlexibleTopMargin, UIViewAutoresizing.FlexibleRightMargin]
         return self.stopIcon
     }
     
     // stop
-    public func playerVisualViewStopWithPlaceHolder(playerVisual: PlayerVisual) -> UIView? {
+    public func playerVisualStopWithPlaceHolder(playerVisual: PlayerVisual) -> UIView? {
         self.isPlay = false
         self.playIcon.center = playerVisual.view.center
+        self.playIcon.autoresizingMask = [UIViewAutoresizing.FlexibleBottomMargin, UIViewAutoresizing.FlexibleLeftMargin, UIViewAutoresizing.FlexibleTopMargin, UIViewAutoresizing.FlexibleRightMargin]
         return self.playIcon
     }
     
     // error
-    public func playerVisualViewFailWithPlaceHolder(playerVisual: PlayerVisual) -> UIView? {
+    public func playerVisualFailWithPlaceHolder(playerVisual: PlayerVisual) -> UIView? {
         self.isReady = false
         self.isPlay = false
         self.failView.center = playerVisual.view.center
+        self.failView.autoresizingMask = [UIViewAutoresizing.FlexibleBottomMargin, UIViewAutoresizing.FlexibleLeftMargin, UIViewAutoresizing.FlexibleTopMargin, UIViewAutoresizing.FlexibleRightMargin]
         return self.failView
     }
     
-    public func playerVisualViewTappedShouldPlay(playerVisual: PlayerVisual) -> Bool {
+    // tap
+    public func playerVisualTappedShouldPlay(playerVisual: PlayerVisual) -> Bool {
         guard self.isReady else {
             return false
         }
@@ -221,8 +212,17 @@ extension PlayerVisualViewDefault {
         return !self.isPlay
     }
     
-    public func playerVisualViewSlidedShouldSeekToTime(playerVisual: PlayerVisual) -> NSTimeInterval {
-        return 0
+    // slide
+    public func playerVisualSlidedSeekTimeWillSetWithInterval(playerVisual: PlayerVisual) -> Int64 {
+        if !self.controlBar.barIsHide {
+            self.controlBar.showControlBar(true)
+        }
+        return 1
+    }
+    
+    // size change
+    public func playerVisualVideoSizeChange(playerVisual: PlayerVisual, size: CGSize) {
+        self.delegate?.videoViewSizeChange?(size)
     }
     
     // MARK: - indictaor view
@@ -248,6 +248,7 @@ extension PlayerVisualViewDefault {
         
         self.isPause = true
         self.indictaor.center = playerVisual.view.center
+        self.indictaor.autoresizingMask = [UIViewAutoresizing.FlexibleBottomMargin, UIViewAutoresizing.FlexibleLeftMargin, UIViewAutoresizing.FlexibleTopMargin, UIViewAutoresizing.FlexibleRightMargin]
         return self.indictaor
     }
     
@@ -267,10 +268,25 @@ extension PlayerVisualViewDefault {
             self.controlBar.setMaxTime(maximumDuration)
         }
         
-        if currentTime == 0 || currentTime == maximumDuration || currentTime - self.lastBarProgressUpdate >= self.barProgressResolution {
+        let diffTime = self.lastBarProgressUpdate < currentTime ? currentTime - self.lastBarProgressUpdate : self.lastBarProgressUpdate - currentTime
+        
+        if currentTime == 0 || currentTime == maximumDuration || diffTime >= self.barProgressResolution {
             self.lastBarProgressUpdate = currentTime
             self.controlBar.setProgress(currentTime)
         }
+    }
+    
+    // MARK: - bar delegate
+    public func controlBarDidSlideToValue(value: Double) {
+        self.delegate?.controlBarDidSlideToValue?(value)
+    }
+    
+    public func controlBarPlayBottonDidTapped() {
+        self.delegate?.controlBarPlayBottonDidTapped?()
+    }
+    
+    public func controlBarFullScreenBottonDidTapped() {
+        self.delegate?.controlBarFullScreenBottonDidTapped?()
     }
 }
 

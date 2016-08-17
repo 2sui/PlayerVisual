@@ -49,11 +49,11 @@ public class PlayerVisualControlSlider: UISlider {
 @objc
 public protocol PlayerVisualControlBarDelegate: NSObjectProtocol {
     
-    optional func didSetToProgress(progress: Double)
+    optional func controlBarDidSlideToValue(value: Double)
     
-    optional func playBottonDidTapped()
+    optional func controlBarPlayBottonDidTapped()
     
-    optional func fullScreenBottonDidTapped()
+    optional func controlBarFullScreenBottonDidTapped()
     
 }
 
@@ -212,6 +212,50 @@ public class PlayerVisualControlBar: UIView {
         self.currentTimeLabel.text = self.contertTimevalToString(currentTime)
     }
     
+    /**
+     Layout bar components.
+     */
+    public func layoutBarViews() {
+        self.playBtn.snp_makeConstraints {
+            [unowned self] make in
+            make.left.equalTo(self.barLayer).offset(self.inset.left)
+            make.centerY.equalTo(self.barLayer)
+            make.height.equalTo(30)
+            make.width.equalTo(30)
+        }
+        
+        self.fullScreenBtn.snp_makeConstraints {
+            [unowned self] make in
+            make.right.equalTo(self.barLayer).offset(self.inset.right * (-1))
+            make.centerY.equalTo(self.playBtn)
+            make.height.equalTo(self.playBtn)
+            make.width.equalTo(self.playBtn)
+        }
+        
+        self.currentTimeLabel.snp_makeConstraints {
+            [unowned self] make in
+            make.left.equalTo(self.playBtn.snp_right).offset(self.itemSpace)
+            make.centerY.equalTo(self.playBtn)
+            make.height.equalTo(20)
+            make.width.equalTo(36)
+        }
+        
+        self.maxTimeLabel.snp_makeConstraints {
+            [unowned self] make in
+            make.right.equalTo(self.fullScreenBtn.snp_left).offset(self.itemSpace * (-1))
+            make.centerY.equalTo(self.currentTimeLabel)
+            make.height.equalTo(self.currentTimeLabel)
+            make.width.equalTo(self.currentTimeLabel)
+        }
+        
+        self.slider.snp_makeConstraints {
+            [unowned self] make in
+            make.left.equalTo(self.currentTimeLabel.snp_right).offset(self.itemSpace)
+            make.right.equalTo(self.maxTimeLabel.snp_left).offset(self.itemSpace * (-1))
+            make.centerY.equalTo(self.playBtn)
+            make.height.equalTo(self.currentTimeLabel)
+        }
+    }
     
     // MARK: - Private
     
@@ -304,45 +348,9 @@ public class PlayerVisualControlBar: UIView {
         self.slider.addTarget(self, action: #selector(rejectSliderValueChange), forControlEvents: UIControlEvents.TouchUpInside)
         self.slider.addTarget(self, action: #selector(sliderValueChanged), forControlEvents: UIControlEvents.ValueChanged)
         
-        self.playBtn.snp_makeConstraints {
-            [unowned self] make in
-            make.left.equalTo(self.barLayer).offset(self.inset.left)
-            make.centerY.equalTo(self.barLayer)
-            make.height.equalTo(30)
-            make.width.equalTo(30)
-        }
-        
-        self.fullScreenBtn.snp_makeConstraints {
-            [unowned self] make in
-            make.right.equalTo(self.barLayer).offset(self.inset.right * (-1))
-            make.centerY.equalTo(self.playBtn)
-            make.height.equalTo(self.playBtn)
-            make.width.equalTo(self.playBtn)
-        }
-        
-        self.currentTimeLabel.snp_makeConstraints {
-            [unowned self] make in
-            make.left.equalTo(self.playBtn.snp_right).offset(self.itemSpace)
-            make.centerY.equalTo(self.playBtn)
-            make.height.equalTo(20)
-            make.width.equalTo(36)
-        }
-        
-        self.maxTimeLabel.snp_makeConstraints {
-            [unowned self] make in
-            make.right.equalTo(self.fullScreenBtn.snp_left).offset(self.itemSpace * (-1))
-            make.centerY.equalTo(self.currentTimeLabel)
-            make.height.equalTo(self.currentTimeLabel)
-            make.width.equalTo(self.currentTimeLabel)
-        }
-        
-        self.slider.snp_makeConstraints {
-            [unowned self] make in
-            make.left.equalTo(self.currentTimeLabel.snp_right).offset(self.itemSpace)
-            make.right.equalTo(self.maxTimeLabel.snp_left).offset(self.itemSpace * (-1))
-            make.centerY.equalTo(self.playBtn)
-            make.height.equalTo(self.currentTimeLabel)
-        }
+        // TODO: Disable slider for developing.
+        self.slider.enabled = false
+        self.layoutBarViews()
     }
     
     private func hideBarWithTimer(interval: NSTimeInterval) {
@@ -367,7 +375,7 @@ public class PlayerVisualControlBar: UIView {
         }
     }
     
-    func barShow(shouldHide: Bool) {
+    internal func barShow(shouldHide: Bool) {
         if 0 < self.animationDuration && self.isBarHide {
             self.isAnimating = true
             self.barLayer.hidden = false
@@ -411,7 +419,7 @@ public class PlayerVisualControlBar: UIView {
         }
     }
     
-    func barHide(timer: NSTimer?) {
+    internal func barHide(timer: NSTimer?) {
         self.removeHideTimer()
         
         if nil != timer && 0 < self.animationDuration {
@@ -448,39 +456,39 @@ public class PlayerVisualControlBar: UIView {
         self.isBarHide = true
     }
     
-    func playButtonTapped() {
+    internal func playButtonTapped() {
         if self.isAnimating {
             return
         }
         
         self.hideControlBar(afterTime: self.autoHideDelayTime)
-        self.delegate?.playBottonDidTapped?()
+        self.delegate?.controlBarPlayBottonDidTapped?()
     }
     
-    func fullScreenButtonTapped() {
+    internal func fullScreenButtonTapped() {
         if self.isAnimating {
             return
         }
         
         self.hideControlBar(afterTime: self.autoHideDelayTime)
-        self.delegate?.fullScreenBottonDidTapped?()
+        self.delegate?.controlBarFullScreenBottonDidTapped?()
     }
     
-    func acceptSliderValueChange() {
+    internal func acceptSliderValueChange() {
         self.sliderAcceptChange = true
         self.showControlBar(false)
     }
     
-    func rejectSliderValueChange() {
+    internal func rejectSliderValueChange() {
         self.sliderAcceptChange = false
         self.hideControlBar(afterTime: self.autoHideDelayTime)
     }
     
-    func sliderValueChanged() {
+    internal func sliderValueChanged() {
         if self.isAnimating || !self.sliderAcceptChange {
             return
         }
         
-        self.delegate?.didSetToProgress?(0)
+        self.delegate?.controlBarDidSlideToValue?(Double(self.slider.value))
     }
 }
