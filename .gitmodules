@@ -1,0 +1,6 @@
+[submodule "Submodules/QPlayer"]
+	path = Submodules/QPlayer
+	url = git@gitlab.com:QPHi/QPlayer.git
+[submodule "Submodules/SnapKit"]
+	path = Submodules/SnapKit
+	url = https://github.com/SnapKit/SnapKit.git

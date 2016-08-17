@@ -15,9 +15,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		248FB09A1D64755500E198BF /* PBXContainerItemProxy */ = {
+		248FB0BD1D6478B600E198BF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 248FB0961D64755500E198BF /* QPlayer.xcodeproj */;
+			containerPortal = 248FB0B91D6478B600E198BF /* QPlayer.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 2410C2141D646EE200BB7E96;
 			remoteInfo = QPlayer;
@@ -28,11 +28,11 @@
 		2410C1EC1D64677E00BB7E96 /* PlayerVisual.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PlayerVisual.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2410C1EF1D64677E00BB7E96 /* PlayerVisual.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerVisual.h; sourceTree = "<group>"; };
 		2410C1F11D64677E00BB7E96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		248FB0961D64755500E198BF /* QPlayer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = QPlayer.xcodeproj; path = ../QPlayer/Project/QPlayer.xcodeproj; sourceTree = "<group>"; };
 		248FB0B11D64773300E198BF /* PlayerVisual.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerVisual.swift; path = Source/PlayerVisual.swift; sourceTree = "<group>"; };
 		248FB0B31D64774F00E198BF /* PlayerVisualViewDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerVisualViewDefault.swift; path = Source/Components/PlayerVisualViewDefault.swift; sourceTree = "<group>"; };
 		248FB0B41D64774F00E198BF /* PlayVisualControlBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayVisualControlBar.swift; path = Source/Components/PlayVisualControlBar.swift; sourceTree = "<group>"; };
 		248FB0B71D64778C00E198BF /* Resource */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Resource; path = Source/Resource; sourceTree = "<group>"; };
+		248FB0B91D6478B600E198BF /* QPlayer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = QPlayer.xcodeproj; path = Submodules/QPlayer/Project/QPlayer.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,18 +75,10 @@
 			path = PlayerVisual;
 			sourceTree = "<group>";
 		};
-		248FB0971D64755500E198BF /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				248FB09B1D64755500E198BF /* QPlayer.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		248FB09E1D6475E800E198BF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				248FB0961D64755500E198BF /* QPlayer.xcodeproj */,
+				248FB0B91D6478B600E198BF /* QPlayer.xcodeproj */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -98,6 +90,14 @@
 				248FB0B41D64774F00E198BF /* PlayVisualControlBar.swift */,
 			);
 			name = Components;
+			sourceTree = "<group>";
+		};
+		248FB0BA1D6478B600E198BF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				248FB0BE1D6478B600E198BF /* QPlayer.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -160,8 +160,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 248FB0971D64755500E198BF /* Products */;
-					ProjectRef = 248FB0961D64755500E198BF /* QPlayer.xcodeproj */;
+					ProductGroup = 248FB0BA1D6478B600E198BF /* Products */;
+					ProjectRef = 248FB0B91D6478B600E198BF /* QPlayer.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -172,11 +172,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		248FB09B1D64755500E198BF /* QPlayer.framework */ = {
+		248FB0BE1D6478B600E198BF /* QPlayer.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = QPlayer.framework;
-			remoteRef = 248FB09A1D64755500E198BF /* PBXContainerItemProxy */;
+			remoteRef = 248FB0BD1D6478B600E198BF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
