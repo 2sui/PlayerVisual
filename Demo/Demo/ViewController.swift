@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PlayerVisual
 
 class ViewController: UIViewController, PlayerVisualDefaultDelegate {
     let videoView = UIView()

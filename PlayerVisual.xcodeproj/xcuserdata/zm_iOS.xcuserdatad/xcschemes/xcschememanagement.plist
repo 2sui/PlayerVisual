@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>PlayerVisual.xcscheme</key>
+		<key>PlayerVisual.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -12,7 +12,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>241764441D5DBE830034FAD3</key>
+		<key>2410C15C1D6458E700BB7E96</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2410C1661D6458E800BB7E96</key>
 		<dict>
 			<key>primary</key>
 			<true/>

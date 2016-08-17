@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  PlayerVisual
+//  Demo
 //
-//  Created by zm_iOS on 16/8/12.
+//  Created by zm_iOS on 16/8/17.
 //  Copyright © 2016年 zm_iOS. All rights reserved.
 //
 

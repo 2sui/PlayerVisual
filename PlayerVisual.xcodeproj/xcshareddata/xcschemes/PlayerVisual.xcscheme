@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "241764441D5DBE830034FAD3"
-               BuildableName = "PlayerVisual.app"
+               BlueprintIdentifier = "2410C15C1D6458E700BB7E96"
+               BuildableName = "PlayerVisual.framework"
                BlueprintName = "PlayerVisual"
                ReferencedContainer = "container:PlayerVisual.xcodeproj">
             </BuildableReference>
@@ -28,12 +28,22 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "2410C1661D6458E800BB7E96"
+               BuildableName = "PlayerVisualTests.xctest"
+               BlueprintName = "PlayerVisualTests"
+               ReferencedContainer = "container:PlayerVisual.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "241764441D5DBE830034FAD3"
-            BuildableName = "PlayerVisual.app"
+            BlueprintIdentifier = "2410C15C1D6458E700BB7E96"
+            BuildableName = "PlayerVisual.framework"
             BlueprintName = "PlayerVisual"
             ReferencedContainer = "container:PlayerVisual.xcodeproj">
          </BuildableReference>
@@ -51,16 +61,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "241764441D5DBE830034FAD3"
-            BuildableName = "PlayerVisual.app"
+            BlueprintIdentifier = "2410C15C1D6458E700BB7E96"
+            BuildableName = "PlayerVisual.framework"
             BlueprintName = "PlayerVisual"
             ReferencedContainer = "container:PlayerVisual.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -70,16 +79,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "241764441D5DBE830034FAD3"
-            BuildableName = "PlayerVisual.app"
+            BlueprintIdentifier = "2410C15C1D6458E700BB7E96"
+            BuildableName = "PlayerVisual.framework"
             BlueprintName = "PlayerVisual"
             ReferencedContainer = "container:PlayerVisual.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
