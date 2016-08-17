@@ -40,7 +40,7 @@ extension PlayerVisual: PlayerVisualControlBarDelegate {
 
 // MARK: PlayerVisualViewDefault
 
-public class PlayerVisualViewDefault: NSObject, PlayerVisualViewDelegate {
+public class PlayerVisualViewDefault: NSObject, PlayerVisualDelegate {
     public var barProgressResolution: NSTimeInterval = 1
     
     public override init() {

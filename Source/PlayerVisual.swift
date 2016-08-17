@@ -11,7 +11,7 @@ import UIKit
 // MARK: PlayerVisualViewDelegate
 
 @objc
-public protocol PlayerVisualViewDelegate: NSObjectProtocol {
+public protocol PlayerVisualDelegate: NSObjectProtocol {
     
     func playerVisualViewStatuInitWithPlaceHolder(playerVisual: PlayerVisual) -> UIView?
     
@@ -53,7 +53,7 @@ public protocol PlayerVisualViewDelegate: NSObjectProtocol {
 
 public class PlayerVisual: Player, PlayerDelegate {
     
-    public weak var visualDelegate: PlayerVisualViewDelegate?
+    public weak var visualDelegate: PlayerVisualDelegate?
     public var autoPlay: Bool = true
     
     public convenience init() {
@@ -258,9 +258,3 @@ extension PlayerVisual {
     }
 }
 
-extension PlayerView: PlayerVisualControlBarDelegate {
-    
-    func didSetToProgress(progress: Double) {
-        
-    }
-}
