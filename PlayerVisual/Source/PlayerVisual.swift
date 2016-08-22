@@ -87,9 +87,7 @@ public class PlayerVisual: QPlayer, QPlayerDelegate {
         super.addLayerToView(toView)
         
         if nil != toView {
-            
             self.view.frame = toView!.bounds
-            
             self.prepareComponent()
             
         } else {
