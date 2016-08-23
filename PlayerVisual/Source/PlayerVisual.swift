@@ -100,15 +100,6 @@ public class PlayerVisual: QPlayer, QPlayerDelegate {
         if nil != toView {
             self.view.frame = toView!.bounds
             
-//            switch self.playbackState {
-//            case .Paused:
-//                self.placeHolderView = self.visualDelegate?.playerVisualPauseWithPlaceHolder(self)
-//            case .Stopped, .Failed:
-//                self.placeHolderView = self.visualDelegate?.playerVisualStopWithPlaceHolder(self)
-//            case .Playing:
-//                self.placeHolderView = self.visualDelegate?.playerVisualPlayWithPlaceHolder(self)
-//            }
-            
         } else {
             self.placeHolderView = nil
             self.indictaorView = nil
