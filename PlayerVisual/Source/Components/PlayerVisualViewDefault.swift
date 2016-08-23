@@ -78,12 +78,12 @@ public class PlayerVisualViewDefault: NSObject, PlayerVisualDelegate, PlayerVisu
     private var isPlay = false {
         didSet {
             if oldValue != self.isPlay {
+                self.isPause = false
+                
                 if self.isPlay {
-                    self.isPause = false
                     self.controlBar.setStatPlay()
                     
                 } else {
-                    self.isPause = true
                     self.controlBar.setStatStop()
                 }
             }
