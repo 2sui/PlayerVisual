@@ -443,27 +443,33 @@ public class PlayerVisualControlBar: UIView {
             self.barLayer.hidden = false
             
             UIView.animateWithDuration(self.animationDuration, animations: {
-                [unowned self] in
-                self.barLayer.alpha = 1
-                self.progress.alpha = 0
+                [weak self] in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.barLayer.alpha = 1
+                strongSelf.progress.alpha = 0
                 
             }, completion: {
-                [unowned self] finished in
-                
-                if !finished {
-                    self.progress.alpha = 1
-                    self.barLayer.alpha = 0
-                    self.barLayer.hidden = true
-                    
-                } else {
-                    self.progress.hidden = true
-                    self.isBarHide = false
+                [weak self] finished in
+                guard let strongSelf = self else {
+                    return
                 }
                 
-                self.isAnimating = false
+                if !finished {
+                    strongSelf.progress.alpha = 1
+                    strongSelf.barLayer.alpha = 0
+                    strongSelf.barLayer.hidden = true
+                    
+                } else {
+                    strongSelf.progress.hidden = true
+                    strongSelf.isBarHide = false
+                }
+                
+                strongSelf.isAnimating = false
                 
                 if finished && shouldHide {
-                    self.hideControlBar(afterTime: self.autoHideDelayTime)
+                    strongSelf.hideControlBar(afterTime: strongSelf.autoHideDelayTime)
                 }
             })
             
@@ -489,23 +495,23 @@ public class PlayerVisualControlBar: UIView {
             self.progress.hidden = false
             
             UIView.animateWithDuration(self.animationDuration, animations: {
-                [unowned self] in
-                self.barLayer.alpha = 0
-                self.progress.alpha = 1
+                [weak self] in
+                self?.barLayer.alpha = 0
+                self?.progress.alpha = 1
                 
             }, completion: {
-                [unowned self] finished in
+                [weak self] finished in
                 if finished {
-                self.barLayer.hidden = true
-                self.isBarHide = true
+                self?.barLayer.hidden = true
+                self?.isBarHide = true
                         
                 } else {
-                    self.barLayer.alpha = 1
-                    self.progress.alpha = 0
-                    self.progress.hidden = true
+                    self?.barLayer.alpha = 1
+                    self?.progress.alpha = 0
+                    self?.progress.hidden = true
                 }
                 
-                self.isAnimating = false
+                self?.isAnimating = false
             })
             
             return
