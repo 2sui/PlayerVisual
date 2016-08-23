@@ -28,7 +28,7 @@ class ViewController: UIViewController, PlayerVisualDefaultDelegate {
         
         playerComponent.delegate = self
 //        playerComponent.alwaysHideBar = true
-        playerComponent.hideFullScreenBotton = true
+        playerComponent.hideFullScreenBotton = false
         playerComponent.playIcon.image = UIImage(named: "btn_play_bg_a")
         playerComponent.stopIcon.image = UIImage(named: "btn_pause_longmv_big_a")
         

@@ -75,7 +75,18 @@ public class PlayerVisual: QPlayer, QPlayerDelegate {
     
     deinit {
         self.addToViewController(nil, toView: nil)
+        self.controlBarView = nil
+        self.placeHolderView = nil
+        self.indictaorView = nil
         self.visualDelegate = nil
+    }
+    
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+        self.continuePlayAfterEnterForeground = false
+        self.prepareInteractive()
+        self.prepareControlBarComponent()
+        self.prepareHolderComponent()
     }
     
     // MARK: - Public
@@ -87,18 +98,16 @@ public class PlayerVisual: QPlayer, QPlayerDelegate {
         super.addLayerToView(toView)
         
         if nil != toView {
-            self.prepareComponent()
+            self.view.frame = toView!.bounds
             
         } else {
             self.placeHolderView = nil
-            self.controlBarView = nil
             self.indictaorView = nil
         }
     }
     
     
     // MARK: - Private
-    
     private var placeHolderView: UIView? {
         didSet {
             if self.placeHolderView != oldValue {
@@ -133,13 +142,6 @@ public class PlayerVisual: QPlayer, QPlayerDelegate {
                 }
             }
         }
-    }
-    
-    private func prepareComponent() {
-        self.continuePlayAfterEnterForeground = false
-        self.prepareInteractive()
-        self.prepareHolderComponent()
-        self.prepareControlBarComponent()
     }
     
     private func prepareInteractive() {
@@ -232,32 +234,26 @@ extension PlayerVisual {
         
         switch player.playbackState {
             
-        case .Some(.Failed):
+        case .Failed:
             self.placeHolderView = self.visualDelegate?.playerVisualFailWithPlaceHolder(self)
             
-        case .Some(.Stopped):
+        case .Stopped:
             self.placeHolderView = self.visualDelegate?.playerVisualStopWithPlaceHolder(self)
             
-        case .Some(.Paused):
+        case .Paused:
             self.placeHolderView = self.visualDelegate?.playerVisualPauseWithPlaceHolder(self)
             
-        case .Some(.Playing):
+        case .Playing:
             self.placeHolderView = self.visualDelegate?.playerVisualPlayWithPlaceHolder(self)
-            
-        default:
-            break
         }
     }
     
     public func playerBufferingStateDidChange(player: QPlayer) {
         switch player.bufferingState {
-        case .None:
-            self.indictaorView = self.visualDelegate?.playerVisualIndictaorViewError(self)
-            
-        case .Some(.Delayed):
+        case .Delayed:
             self.indictaorView = self.visualDelegate?.playerVisualIndictaorViewDelay(self)
             
-        case .Some(.Ready):
+        case .Ready:
             self.indictaorView = self.visualDelegate?.playerVisualIndictaorViewReady(self)
             
         default:
