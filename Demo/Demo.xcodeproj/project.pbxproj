@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A87C0AD1D64A3B500E9240A /* QPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A87C0AC1D64A3B500E9240A /* QPlayer.framework */; };
-		0A87C0AF1D64A3BC00E9240A /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A87C0AE1D64A3BC00E9240A /* SnapKit.framework */; };
 		2410BFF01D64508800BB7E96 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2410BFEF1D64508800BB7E96 /* AppDelegate.swift */; };
 		2410BFF21D64508800BB7E96 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2410BFF11D64508800BB7E96 /* ViewController.swift */; };
 		2410BFF51D64508800BB7E96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2410BFF31D64508800BB7E96 /* Main.storyboard */; };
@@ -50,8 +48,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0A87C0AC1D64A3B500E9240A /* QPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QPlayer.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Demo-gciqodcajlaklecmhncbrcajuaqh/Build/Products/Debug-iphonesimulator/QPlayer.framework"; sourceTree = "<group>"; };
-		0A87C0AE1D64A3BC00E9240A /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Demo-gciqodcajlaklecmhncbrcajuaqh/Build/Products/Debug-iphonesimulator/SnapKit.framework"; sourceTree = "<group>"; };
 		2410BFEC1D64508800BB7E96 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2410BFEF1D64508800BB7E96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2410BFF11D64508800BB7E96 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -83,8 +79,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A87C0AF1D64A3BC00E9240A /* SnapKit.framework in Frameworks */,
-				0A87C0AD1D64A3B500E9240A /* QPlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,8 +88,6 @@
 		2410BFE31D64508800BB7E96 = {
 			isa = PBXGroup;
 			children = (
-				0A87C0AE1D64A3BC00E9240A /* SnapKit.framework */,
-				0A87C0AC1D64A3B500E9240A /* QPlayer.framework */,
 				248FB09F1D64766B00E198BF /* PlayerVisual.xcodeproj */,
 				2410BFEE1D64508800BB7E96 /* Demo */,
 				2410BFED1D64508800BB7E96 /* Products */,
