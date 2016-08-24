@@ -12,6 +12,10 @@
 		2410BFF51D64508800BB7E96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2410BFF31D64508800BB7E96 /* Main.storyboard */; };
 		2410BFF71D64508800BB7E96 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2410BFF61D64508800BB7E96 /* Assets.xcassets */; };
 		2410BFFA1D64508800BB7E96 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2410BFF81D64508800BB7E96 /* LaunchScreen.storyboard */; };
+		242714C11D6D47F9008FB22C /* PlayerVisual.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 248FB0A51D64766B00E198BF /* PlayerVisual.framework */; };
+		242714C41D6D47F9008FB22C /* QPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242714C21D6D47F9008FB22C /* QPlayer.framework */; };
+		242714C51D6D47F9008FB22C /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242714C31D6D47F9008FB22C /* SnapKit.framework */; };
+		243D16881D6D82F10096A8FE /* Athena.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 243D16871D6D82F10096A8FE /* Athena.mp3 */; };
 		24F0A2791D648780004BEDDC /* btn_full_screen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24F0A2691D648780004BEDDC /* btn_full_screen@2x.png */; };
 		24F0A27A1D648780004BEDDC /* btn_full_screen@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24F0A26A1D648780004BEDDC /* btn_full_screen@3x.png */; };
 		24F0A27B1D648780004BEDDC /* btn_location_a@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24F0A26B1D648780004BEDDC /* btn_location_a@2x.png */; };
@@ -31,13 +35,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		0A87C0AA1D64A3A500E9240A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 248FB09F1D64766B00E198BF /* PlayerVisual.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 2410C1EB1D64677E00BB7E96;
-			remoteInfo = PlayerVisual;
-		};
 		248FB0A41D64766B00E198BF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 248FB09F1D64766B00E198BF /* PlayerVisual.xcodeproj */;
@@ -55,6 +52,12 @@
 		2410BFF61D64508800BB7E96 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2410BFF91D64508800BB7E96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2410BFFB1D64508800BB7E96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		242714C21D6D47F9008FB22C /* QPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QPlayer.framework; path = "../../Library/Developer/Xcode/DerivedData/Demo-hiwmhorjtihavqespzqnsyzvqvwr/Build/Products/Debug-iphonesimulator/QPlayer.framework"; sourceTree = "<group>"; };
+		242714C31D6D47F9008FB22C /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = "../../Library/Developer/Xcode/DerivedData/Demo-hiwmhorjtihavqespzqnsyzvqvwr/Build/Products/Debug-iphonesimulator/SnapKit.framework"; sourceTree = "<group>"; };
+		243D16871D6D82F10096A8FE /* Athena.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Athena.mp3; sourceTree = "<group>"; };
+		243D168A1D6D84300096A8FE /* 1471512935911.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1471512935911.mp4; sourceTree = "<group>"; };
+		243D168B1D6D84420096A8FE /* mp3_2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = mp3_2.mp4; sourceTree = "<group>"; };
+		243D168C1D6D84470096A8FE /* mp3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = mp3.mp4; sourceTree = "<group>"; };
 		248FB09F1D64766B00E198BF /* PlayerVisual.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PlayerVisual.xcodeproj; path = ../PlayerVisual.xcodeproj; sourceTree = "<group>"; };
 		24F0A2691D648780004BEDDC /* btn_full_screen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_full_screen@2x.png"; path = "Resource/btn_full_screen@2x.png"; sourceTree = SOURCE_ROOT; };
 		24F0A26A1D648780004BEDDC /* btn_full_screen@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_full_screen@3x.png"; path = "Resource/btn_full_screen@3x.png"; sourceTree = SOURCE_ROOT; };
@@ -79,6 +82,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				242714C41D6D47F9008FB22C /* QPlayer.framework in Frameworks */,
+				242714C51D6D47F9008FB22C /* SnapKit.framework in Frameworks */,
+				242714C11D6D47F9008FB22C /* PlayerVisual.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +94,8 @@
 		2410BFE31D64508800BB7E96 = {
 			isa = PBXGroup;
 			children = (
+				242714C21D6D47F9008FB22C /* QPlayer.framework */,
+				242714C31D6D47F9008FB22C /* SnapKit.framework */,
 				248FB09F1D64766B00E198BF /* PlayerVisual.xcodeproj */,
 				2410BFEE1D64508800BB7E96 /* Demo */,
 				2410BFED1D64508800BB7E96 /* Products */,
@@ -127,6 +135,10 @@
 		24F0A2681D64876F004BEDDC /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				243D168A1D6D84300096A8FE /* 1471512935911.mp4 */,
+				243D168C1D6D84470096A8FE /* mp3.mp4 */,
+				243D168B1D6D84420096A8FE /* mp3_2.mp4 */,
+				243D16871D6D82F10096A8FE /* Athena.mp3 */,
 				24F0A2691D648780004BEDDC /* btn_full_screen@2x.png */,
 				24F0A26A1D648780004BEDDC /* btn_full_screen@3x.png */,
 				24F0A26B1D648780004BEDDC /* btn_location_a@2x.png */,
@@ -161,7 +173,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				0A87C0AB1D64A3A500E9240A /* PBXTargetDependency */,
 			);
 			name = Demo;
 			productName = Demo;
@@ -180,7 +191,6 @@
 				TargetAttributes = {
 					2410BFEB1D64508800BB7E96 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 5XTYK25ZJL;
 					};
 				};
 			};
@@ -240,6 +250,7 @@
 				24F0A27F1D648780004BEDDC /* btn_pause_longmv_big_a@2x.png in Resources */,
 				2410BFF71D64508800BB7E96 /* Assets.xcassets in Resources */,
 				24F0A2861D648780004BEDDC /* btn_play_bg_b@3x.png in Resources */,
+				243D16881D6D82F10096A8FE /* Athena.mp3 in Resources */,
 				24F0A27B1D648780004BEDDC /* btn_location_a@2x.png in Resources */,
 				2410BFF51D64508800BB7E96 /* Main.storyboard in Resources */,
 			);
@@ -258,14 +269,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		0A87C0AB1D64A3A500E9240A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = PlayerVisual;
-			targetProxy = 0A87C0AA1D64A3A500E9240A /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		2410BFF31D64508800BB7E96 /* Main.storyboard */ = {
