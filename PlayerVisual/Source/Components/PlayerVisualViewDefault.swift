@@ -279,35 +279,35 @@ extension PlayerVisualViewDefault {
         guard self.isReady else {
             return
         }
-        self.delegate?.controlBarDidSlideToValue(value)
+        self.delegate?.controlBarDidSlideToValue?(value)
     }
     
     public func controlBarPlayBottonDidTapped() {
         guard self.isReady else {
             return
         }
-        self.delegate?.controlBarPlayBottonDidTapped()
+        self.delegate?.controlBarPlayBottonDidTapped?()
     }
     
     public func controlBarFullScreenBottonDidTapped() {
-        self.delegate?.controlBarFullScreenBottonDidTapped()
+        self.delegate?.controlBarFullScreenBottonDidTapped?()
     }
     
     
     public func controlBarPlayBottonImageForPlay() -> UIImage? {
-        return self.delegate?.controlBarPlayBottonImageForPlay()
+        return self.delegate?.controlBarPlayBottonImageForPlay?()
     }
     
     public func controlBarPlayBottonImageForStop() -> UIImage? {
-        return self.delegate?.controlBarPlayBottonImageForStop()
+        return self.delegate?.controlBarPlayBottonImageForStop?()
     }
     
     public func controlBarSliderThumbImage() -> UIImage? {
-        return self.delegate?.controlBarSliderThumbImage()
+        return self.delegate?.controlBarSliderThumbImage?()
     }
     
     public func controlBarFullScreenBottonImage() -> UIImage? {
-        return self.delegate?.controlBarFullScreenBottonImage()
+        return self.delegate?.controlBarFullScreenBottonImage?()
     }
 }
 

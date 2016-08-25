@@ -54,19 +54,19 @@ public class PlayerVisualControlSlider: UISlider {
 @objc
 public protocol PlayerVisualControlBarDelegate: NSObjectProtocol {
     
-    func controlBarDidSlideToValue(value: Double)
+    optional func controlBarDidSlideToValue(value: Double)
     
-    func controlBarPlayBottonDidTapped()
+    optional func controlBarPlayBottonDidTapped()
     
-    func controlBarFullScreenBottonDidTapped()
+    optional func controlBarFullScreenBottonDidTapped()
     
-    func controlBarPlayBottonImageForPlay() -> UIImage?
+    optional func controlBarPlayBottonImageForPlay() -> UIImage?
     
-    func controlBarPlayBottonImageForStop() -> UIImage?
+    optional func controlBarPlayBottonImageForStop() -> UIImage?
     
-    func controlBarSliderThumbImage() -> UIImage?
+    optional func controlBarSliderThumbImage() -> UIImage?
     
-    func controlBarFullScreenBottonImage() -> UIImage?
+    optional func controlBarFullScreenBottonImage() -> UIImage?
     
 }
 
@@ -103,10 +103,10 @@ public class PlayerVisualControlBar: UIView {
     /// delegate of PlayerVisualControlBar, which will recive bar bottons touching events and bar slider events.
     public weak var delegate: PlayerVisualControlBarDelegate? {
         didSet {
-            self.playButtonImageForStop = self.delegate?.controlBarPlayBottonImageForStop()
-            self.playButtonImageForPlay = self.delegate?.controlBarPlayBottonImageForPlay()
-            self.sliderThumbImage = self.delegate?.controlBarSliderThumbImage()
-            self.fullScreenImage = self.delegate?.controlBarFullScreenBottonImage()
+            self.playButtonImageForStop = self.delegate?.controlBarPlayBottonImageForStop?()
+            self.playButtonImageForPlay = self.delegate?.controlBarPlayBottonImageForPlay?()
+            self.sliderThumbImage = self.delegate?.controlBarSliderThumbImage?()
+            self.fullScreenImage = self.delegate?.controlBarFullScreenBottonImage?()
         }
     }
     /// Inset of bar content.
@@ -530,7 +530,7 @@ public class PlayerVisualControlBar: UIView {
         }
         
         self.hideControlBar(afterTime: self.autoHideDelayTime)
-        self.delegate?.controlBarPlayBottonDidTapped()
+        self.delegate?.controlBarPlayBottonDidTapped?()
     }
     
     internal func fullScreenButtonTapped() {
@@ -539,7 +539,7 @@ public class PlayerVisualControlBar: UIView {
         }
         
         self.hideControlBar(afterTime: self.autoHideDelayTime)
-        self.delegate?.controlBarFullScreenBottonDidTapped()
+        self.delegate?.controlBarFullScreenBottonDidTapped?()
     }
     
     internal func acceptSliderValueChange() {
@@ -557,6 +557,6 @@ public class PlayerVisualControlBar: UIView {
             return
         }
         
-        self.delegate?.controlBarDidSlideToValue(Double(self.slider.value))
+        self.delegate?.controlBarDidSlideToValue?(Double(self.slider.value))
     }
 }
