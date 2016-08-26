@@ -98,7 +98,8 @@ public class PlayerVisual: QPlayer, QPlayerDelegate {
         super.addLayerToView(toView)
         
         if nil != toView {
-            self.view.frame = toView!.bounds
+            self.view.frame = CGRectMake(0, 0, toView!.bounds.width, toView!.bounds.height)
+            self.view.autoresizingMask = [UIViewAutoresizing.FlexibleHeight, UIViewAutoresizing.FlexibleWidth]
             
         } else {
             self.placeHolderView = nil
