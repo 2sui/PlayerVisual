@@ -386,6 +386,11 @@ public class PlayerVisualControlBar: UIView {
         self.barLayer.alpha = 1
         self.barLayer.hidden = false
         
+        let holderGesture = UITapGestureRecognizer(target: self, action: #selector(doNothing))
+        self.barLayer.userInteractionEnabled = true
+        self.barLayer.addGestureRecognizer(holderGesture)
+        
+        
         // progress
         self.progress.frame = CGRectMake(0, self.frame.height - self.progress.frame.height, self.frame.width, 0)
         self.progress.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleTopMargin, UIViewAutoresizing.FlexibleBottomMargin]
@@ -414,6 +419,8 @@ public class PlayerVisualControlBar: UIView {
         self.slider.enabled = false
         self.layoutBarViews()
     }
+    
+    func doNothing() {}
     
     private func hideBarWithTimer(interval: NSTimeInterval) {
         self.removeHideTimer()
