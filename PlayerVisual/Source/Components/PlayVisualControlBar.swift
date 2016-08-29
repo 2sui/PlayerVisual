@@ -60,14 +60,6 @@ public protocol PlayerVisualControlBarDelegate: NSObjectProtocol {
     
     optional func controlBarFullScreenBottonDidTapped()
     
-    optional func controlBarPlayBottonImageForPlay() -> UIImage?
-    
-    optional func controlBarPlayBottonImageForStop() -> UIImage?
-    
-    optional func controlBarSliderThumbImage() -> UIImage?
-    
-    optional func controlBarFullScreenBottonImage() -> UIImage?
-    
 }
 
 
@@ -101,14 +93,7 @@ public class PlayerVisualControlBar: UIView {
     // MARK: - Public
     
     /// delegate of PlayerVisualControlBar, which will recive bar bottons touching events and bar slider events.
-    public weak var delegate: PlayerVisualControlBarDelegate? {
-        didSet {
-            self.playButtonImageForStop = self.delegate?.controlBarPlayBottonImageForStop?()
-            self.playButtonImageForPlay = self.delegate?.controlBarPlayBottonImageForPlay?()
-            self.sliderThumbImage = self.delegate?.controlBarSliderThumbImage?()
-            self.fullScreenImage = self.delegate?.controlBarFullScreenBottonImage?()
-        }
-    }
+    public weak var delegate: PlayerVisualControlBarDelegate?
     /// Inset of bar content.
     public var itemMarginLeft: CGFloat = 8
     public var itemMarginRight: CGFloat = 8
@@ -128,24 +113,12 @@ public class PlayerVisualControlBar: UIView {
         }
     }
     
-    /// Play botton image for `Play` stat
-    public var playButtonImageForPlay: UIImage? {
-        didSet {
-            if self.isPlayBottonPlay {
-                self.setPlayBtnIconForPlay()
-            }
-        }
-    }
-    /// Play botton image for `Stop/Pause` stat
-    public var playButtonImageForStop: UIImage? {
-        didSet {
-            if !self.isPlayBottonPlay {
-                self.setPlayBtnIconForStop()
-            }
-        }
-    }
+    // Play botton image for `Play` stat
+    public var playButtonImageForPlay: UIImage?
+    // Play botton image for `Stop/Pause` stat
+    public var playButtonImageForStop: UIImage?
     
-    /// Slider thumb image
+    // Slider thumb image
     public var sliderThumbImage: UIImage? {
         get {
             return self.slider.thumbImage
@@ -241,15 +214,17 @@ public class PlayerVisualControlBar: UIView {
     /**
      Set current stat to "Play".
      */
-    public func setStatPlay() {
-        self.setPlayBtnIconForPlay()
+    public func setPlayBtnIconForPlay() {
+        self.playBtn.setImage(playButtonImageForPlay, forState: .Normal)
+        self.isPlayBottonPlay = true
     }
     
     /**
      Set current stat to "Stop".
      */
-    public func setStatStop() {
-        self.setPlayBtnIconForStop()
+    public func setPlayBtnIconForStop() {
+        self.playBtn.setImage(playButtonImageForStop, forState: .Normal)
+        self.isPlayBottonPlay = false
     }
     
     /**
@@ -366,16 +341,6 @@ public class PlayerVisualControlBar: UIView {
         return timeStr
     }
     
-    private func setPlayBtnIconForPlay() {
-        self.playBtn.setImage(self.playButtonImageForPlay, forState: .Normal)
-        self.isPlayBottonPlay = true
-    }
-    
-    private func setPlayBtnIconForStop() {
-        self.playBtn.setImage(self.playButtonImageForStop, forState: .Normal)
-        self.isPlayBottonPlay = false
-    }
-    
     private func prepareBar() {
         self.backgroundColor = UIColor.clearColor()
         
@@ -414,6 +379,10 @@ public class PlayerVisualControlBar: UIView {
         self.slider.addTarget(self, action: #selector(rejectSliderValueChange), forControlEvents: UIControlEvents.TouchCancel)
         self.slider.addTarget(self, action: #selector(rejectSliderValueChange), forControlEvents: UIControlEvents.TouchUpInside)
         self.slider.addTarget(self, action: #selector(sliderValueChanged), forControlEvents: UIControlEvents.ValueChanged)
+    }
+    
+    public override func layoutSubviews() {
+        super.layoutSubviews()
         
         // TODO: Disable slider for developing.
         self.slider.enabled = false

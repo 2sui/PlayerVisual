@@ -1,10 +1,4 @@
-//
-//  ViewController.swift
-//  PlayerVisual
-//
-//  Created by zm_iOS on 16/8/12.
-//  Copyright © 2016年 zm_iOS. All rights reserved.
-//
+
 
 import UIKit
 import PlayerVisual
@@ -31,6 +25,10 @@ class ViewController: UIViewController, PlayerVisualDefaultDelegate {
         playerComponent.hideFullScreenBotton = false
         playerComponent.playIcon.image = UIImage(named: "btn_play_bg_a")
         playerComponent.stopIcon.image = UIImage(named: "btn_pause_longmv_big_a")
+        playerComponent.playButtonIconInControlBar = UIImage(named: "btn_pause_longmv_big_b")
+        playerComponent.stopButtonIconInControlBar = UIImage(named: "btn_play_bg_b")
+        playerComponent.sliderThumbInControlBar = UIImage(named: "icon_badge_bot")
+        playerComponent.fullScreenButtonIconInControlBar = UIImage(named: "btn_full_screen")
         
         player.addToViewController(self, toView: videoView)
         
@@ -80,23 +78,6 @@ extension ViewController {
     
     func videoViewSizeChange(size: CGSize) {
         videoView.frame.size.height = self.view.frame.width * (size.height / size.width)
-    }
-    
-    
-    func controlBarPlayBottonImageForPlay() -> UIImage? {
-        return UIImage(named: "btn_pause_longmv_big_b")
-    }
-    
-    func controlBarPlayBottonImageForStop() -> UIImage? {
-        return UIImage(named: "btn_play_bg_b")
-    }
-    
-    func controlBarSliderThumbImage() -> UIImage? {
-        return UIImage(named: "icon_badge_bot")
-    }
-    
-    func controlBarFullScreenBottonImage() -> UIImage? {
-        return UIImage(named: "btn_full_screen@3x")
     }
 }
 

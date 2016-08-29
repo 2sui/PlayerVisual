@@ -57,6 +57,46 @@ public class PlayerVisualViewDefault: NSObject, PlayerVisualDelegate, PlayerVisu
             self.controlBar.hideFullScreenButton = newValue
         }
     }
+    
+    public var playButtonIconInControlBar: UIImage? {
+        get {
+            return self.controlBar.playButtonImageForPlay
+        }
+        
+        set {
+            self.controlBar.playButtonImageForPlay = newValue
+        }
+    }
+    
+    public var stopButtonIconInControlBar: UIImage? {
+        get {
+            return self.controlBar.playButtonImageForStop
+        }
+        
+        set {
+            self.controlBar.playButtonImageForStop = newValue
+        }
+    }
+    
+    public var fullScreenButtonIconInControlBar: UIImage? {
+        get {
+            return self.controlBar.fullScreenImage
+        }
+        
+        set {
+            self.controlBar.fullScreenImage = newValue
+        }
+    }
+    
+    public var sliderThumbInControlBar: UIImage? {
+        get {
+            return self.controlBar.sliderThumbImage
+        }
+        
+        set {
+            self.controlBar.sliderThumbImage = newValue
+        }
+    }
         
     public let playIcon = UIImageView(frame: CGRectMake(0, 0, 100, 100))
     public let stopIcon = UIImageView(frame: CGRectMake(0, 0, 100, 100))
@@ -81,10 +121,10 @@ public class PlayerVisualViewDefault: NSObject, PlayerVisualDelegate, PlayerVisu
                 self.isPause = false
                 
                 if self.isPlay {
-                    self.controlBar.setStatPlay()
+                    self.controlBar.setPlayBtnIconForPlay()
                     
                 } else {
-                    self.controlBar.setStatStop()
+                    self.controlBar.setPlayBtnIconForStop()
                 }
             }
         }
@@ -292,23 +332,5 @@ extension PlayerVisualViewDefault {
     public func controlBarFullScreenBottonDidTapped() {
         self.delegate?.controlBarFullScreenBottonDidTapped?()
     }
-    
-    
-    public func controlBarPlayBottonImageForPlay() -> UIImage? {
-        return self.delegate?.controlBarPlayBottonImageForPlay?()
-    }
-    
-    public func controlBarPlayBottonImageForStop() -> UIImage? {
-        return self.delegate?.controlBarPlayBottonImageForStop?()
-    }
-    
-    public func controlBarSliderThumbImage() -> UIImage? {
-        return self.delegate?.controlBarSliderThumbImage?()
-    }
-    
-    public func controlBarFullScreenBottonImage() -> UIImage? {
-        return self.delegate?.controlBarFullScreenBottonImage?()
-    }
 }
-
 

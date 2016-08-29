@@ -53,7 +53,6 @@
 		2410BFFB1D64508800BB7E96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		242714C21D6D47F9008FB22C /* QPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QPlayer.framework; path = "../../Library/Developer/Xcode/DerivedData/Demo-hiwmhorjtihavqespzqnsyzvqvwr/Build/Products/Debug-iphonesimulator/QPlayer.framework"; sourceTree = "<group>"; };
 		242714C31D6D47F9008FB22C /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = "../../Library/Developer/Xcode/DerivedData/Demo-hiwmhorjtihavqespzqnsyzvqvwr/Build/Products/Debug-iphonesimulator/SnapKit.framework"; sourceTree = "<group>"; };
-		243D168B1D6D84420096A8FE /* mp3_2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = mp3_2.mp4; sourceTree = "<group>"; };
 		248FB09F1D64766B00E198BF /* PlayerVisual.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PlayerVisual.xcodeproj; path = ../PlayerVisual.xcodeproj; sourceTree = "<group>"; };
 		24F0A2691D648780004BEDDC /* btn_full_screen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_full_screen@2x.png"; path = "Resource/btn_full_screen@2x.png"; sourceTree = SOURCE_ROOT; };
 		24F0A26A1D648780004BEDDC /* btn_full_screen@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_full_screen@3x.png"; path = "Resource/btn_full_screen@3x.png"; sourceTree = SOURCE_ROOT; };
@@ -131,7 +130,6 @@
 		24F0A2681D64876F004BEDDC /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				243D168B1D6D84420096A8FE /* mp3_2.mp4 */,
 				24F0A2691D648780004BEDDC /* btn_full_screen@2x.png */,
 				24F0A26A1D648780004BEDDC /* btn_full_screen@3x.png */,
 				24F0A26B1D648780004BEDDC /* btn_location_a@2x.png */,
