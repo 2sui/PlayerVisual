@@ -74,7 +74,6 @@ public class PlayerVisual: QPlayer, QPlayerDelegate {
     }
     
     deinit {
-        self.addToViewController(nil, toView: nil)
         self.controlBarView = nil
         self.placeHolderView = nil
         self.indictaorView = nil
@@ -223,7 +222,7 @@ extension PlayerVisual {
         self.visualDelegate?.playerVisualControlBarProgressPreferChange(self, currentTime: player.currentTime, maximumDuration: player.maximumDuration)
         let readyView = self.visualDelegate?.playerVisualReadyToPlayWithPlaceHolder(self)
         
-        if self.autoPlay {
+        if self.autoPlay && 0 == self.currentTime {
             player.playFromBeginning()
             
         } else {
