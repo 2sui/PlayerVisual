@@ -7,14 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2405E0141D76D9BD007A3E4D /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2405E0131D76D9BD007A3E4D /* SnapKit.framework */; };
+		2405E0151D76D9BD007A3E4D /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2405E0131D76D9BD007A3E4D /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2405E0171D76D9C4007A3E4D /* QPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2405E0161D76D9C4007A3E4D /* QPlayer.framework */; };
+		2405E0181D76D9C4007A3E4D /* QPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2405E0161D76D9C4007A3E4D /* QPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2405E0191D76D9CA007A3E4D /* PlayerVisual.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 248FB0A51D64766B00E198BF /* PlayerVisual.framework */; };
+		2405E01A1D76D9CA007A3E4D /* PlayerVisual.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 248FB0A51D64766B00E198BF /* PlayerVisual.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2405E01E1D76DB23007A3E4D /* FullScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2405E01D1D76DB23007A3E4D /* FullScreenController.swift */; };
 		2410BFF01D64508800BB7E96 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2410BFEF1D64508800BB7E96 /* AppDelegate.swift */; };
 		2410BFF21D64508800BB7E96 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2410BFF11D64508800BB7E96 /* ViewController.swift */; };
 		2410BFF51D64508800BB7E96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2410BFF31D64508800BB7E96 /* Main.storyboard */; };
 		2410BFF71D64508800BB7E96 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2410BFF61D64508800BB7E96 /* Assets.xcassets */; };
 		2410BFFA1D64508800BB7E96 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2410BFF81D64508800BB7E96 /* LaunchScreen.storyboard */; };
-		242714C11D6D47F9008FB22C /* PlayerVisual.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 248FB0A51D64766B00E198BF /* PlayerVisual.framework */; };
-		242714C41D6D47F9008FB22C /* QPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242714C21D6D47F9008FB22C /* QPlayer.framework */; };
-		242714C51D6D47F9008FB22C /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242714C31D6D47F9008FB22C /* SnapKit.framework */; };
 		24F0A2791D648780004BEDDC /* btn_full_screen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24F0A2691D648780004BEDDC /* btn_full_screen@2x.png */; };
 		24F0A27A1D648780004BEDDC /* btn_full_screen@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24F0A26A1D648780004BEDDC /* btn_full_screen@3x.png */; };
 		24F0A27B1D648780004BEDDC /* btn_location_a@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24F0A26B1D648780004BEDDC /* btn_location_a@2x.png */; };
@@ -34,6 +38,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		2405E01B1D76D9CA007A3E4D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 248FB09F1D64766B00E198BF /* PlayerVisual.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2410C1EB1D64677E00BB7E96;
+			remoteInfo = PlayerVisual;
+		};
 		248FB0A41D64766B00E198BF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 248FB09F1D64766B00E198BF /* PlayerVisual.xcodeproj */;
@@ -43,7 +54,26 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		2405E00F1D76D977007A3E4D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				2405E0151D76D9BD007A3E4D /* SnapKit.framework in Embed Frameworks */,
+				2405E01A1D76D9CA007A3E4D /* PlayerVisual.framework in Embed Frameworks */,
+				2405E0181D76D9C4007A3E4D /* QPlayer.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		2405E0131D76D9BD007A3E4D /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = SnapKit.framework; path = "/Users/zm_iOS/Library/Developer/Xcode/DerivedData/Demo-hiwmhorjtihavqespzqnsyzvqvwr/Build/Products/Debug-iphoneos/SnapKit.framework"; sourceTree = "<absolute>"; };
+		2405E0161D76D9C4007A3E4D /* QPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = QPlayer.framework; path = "/Users/zm_iOS/Library/Developer/Xcode/DerivedData/Demo-hiwmhorjtihavqespzqnsyzvqvwr/Build/Products/Debug-iphoneos/QPlayer.framework"; sourceTree = "<absolute>"; };
+		2405E01D1D76DB23007A3E4D /* FullScreenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullScreenController.swift; sourceTree = "<group>"; };
 		2410BFEC1D64508800BB7E96 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2410BFEF1D64508800BB7E96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2410BFF11D64508800BB7E96 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -51,8 +81,6 @@
 		2410BFF61D64508800BB7E96 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2410BFF91D64508800BB7E96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2410BFFB1D64508800BB7E96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		242714C21D6D47F9008FB22C /* QPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QPlayer.framework; path = "../../Library/Developer/Xcode/DerivedData/Demo-hiwmhorjtihavqespzqnsyzvqvwr/Build/Products/Debug-iphonesimulator/QPlayer.framework"; sourceTree = "<group>"; };
-		242714C31D6D47F9008FB22C /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = "../../Library/Developer/Xcode/DerivedData/Demo-hiwmhorjtihavqespzqnsyzvqvwr/Build/Products/Debug-iphonesimulator/SnapKit.framework"; sourceTree = "<group>"; };
 		248FB09F1D64766B00E198BF /* PlayerVisual.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PlayerVisual.xcodeproj; path = ../PlayerVisual.xcodeproj; sourceTree = "<group>"; };
 		24F0A2691D648780004BEDDC /* btn_full_screen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_full_screen@2x.png"; path = "Resource/btn_full_screen@2x.png"; sourceTree = SOURCE_ROOT; };
 		24F0A26A1D648780004BEDDC /* btn_full_screen@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_full_screen@3x.png"; path = "Resource/btn_full_screen@3x.png"; sourceTree = SOURCE_ROOT; };
@@ -77,21 +105,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				242714C41D6D47F9008FB22C /* QPlayer.framework in Frameworks */,
-				242714C51D6D47F9008FB22C /* SnapKit.framework in Frameworks */,
-				242714C11D6D47F9008FB22C /* PlayerVisual.framework in Frameworks */,
+				2405E0141D76D9BD007A3E4D /* SnapKit.framework in Frameworks */,
+				2405E0191D76D9CA007A3E4D /* PlayerVisual.framework in Frameworks */,
+				2405E0171D76D9C4007A3E4D /* QPlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2405E0091D76D951007A3E4D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2405E0161D76D9C4007A3E4D /* QPlayer.framework */,
+				2405E0131D76D9BD007A3E4D /* SnapKit.framework */,
+				248FB09F1D64766B00E198BF /* PlayerVisual.xcodeproj */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		2410BFE31D64508800BB7E96 = {
 			isa = PBXGroup;
 			children = (
-				242714C21D6D47F9008FB22C /* QPlayer.framework */,
-				242714C31D6D47F9008FB22C /* SnapKit.framework */,
-				248FB09F1D64766B00E198BF /* PlayerVisual.xcodeproj */,
+				2405E0091D76D951007A3E4D /* Frameworks */,
 				2410BFEE1D64508800BB7E96 /* Demo */,
 				2410BFED1D64508800BB7E96 /* Products */,
 			);
@@ -115,6 +151,7 @@
 				2410BFF61D64508800BB7E96 /* Assets.xcassets */,
 				2410BFF81D64508800BB7E96 /* LaunchScreen.storyboard */,
 				2410BFFB1D64508800BB7E96 /* Info.plist */,
+				2405E01D1D76DB23007A3E4D /* FullScreenController.swift */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
@@ -160,10 +197,12 @@
 				2410BFE81D64508800BB7E96 /* Sources */,
 				2410BFE91D64508800BB7E96 /* Frameworks */,
 				2410BFEA1D64508800BB7E96 /* Resources */,
+				2405E00F1D76D977007A3E4D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				2405E01C1D76D9CA007A3E4D /* PBXTargetDependency */,
 			);
 			name = Demo;
 			productName = Demo;
@@ -182,6 +221,7 @@
 				TargetAttributes = {
 					2410BFEB1D64508800BB7E96 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = K3PS3HFVN9;
 					};
 				};
 			};
@@ -253,12 +293,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2405E01E1D76DB23007A3E4D /* FullScreenController.swift in Sources */,
 				2410BFF21D64508800BB7E96 /* ViewController.swift in Sources */,
 				2410BFF01D64508800BB7E96 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2405E01C1D76D9CA007A3E4D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = PlayerVisual;
+			targetProxy = 2405E01B1D76D9CA007A3E4D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		2410BFF31D64508800BB7E96 /* Main.storyboard */ = {
@@ -370,10 +419,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.2sui.PlayerVisualDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -382,10 +434,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.2sui.PlayerVisualDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

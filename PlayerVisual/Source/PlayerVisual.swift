@@ -96,11 +96,7 @@ public class PlayerVisual: QPlayer, QPlayerDelegate {
     public override func addLayerToView(toView: UIView?) {
         super.addLayerToView(toView)
         
-        if nil != toView {
-            self.view.frame = CGRectMake(0, 0, toView!.bounds.width, toView!.bounds.height)
-            self.view.autoresizingMask = [UIViewAutoresizing.FlexibleHeight, UIViewAutoresizing.FlexibleWidth]
-            
-        } else {
+        if nil == toView {
             self.placeHolderView = nil
             self.indictaorView = nil
         }
