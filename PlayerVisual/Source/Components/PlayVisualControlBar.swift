@@ -234,9 +234,12 @@ public class PlayerVisualControlBar: UIView {
      */
     public func setMaxTime(time: Double) {
         self.barMaxTime = time
-        self.maxTimeLabel.text = self.contertTimevalToString(self.barMaxTime)
         self.slider.minimumValue = 0
         self.slider.maximumValue = Float(self.barMaxTime)
+    }
+    
+    public func setMaxTimeLabel(time: Double) {
+        self.maxTimeLabel.text = self.contertTimevalToString(self.barMaxTime)
     }
     
     /**
@@ -247,6 +250,9 @@ public class PlayerVisualControlBar: UIView {
     public func setProgress(currentTime: Double) {
         self.progress.progress = Float(currentTime / self.barMaxTime)
         self.slider.value = Float(currentTime)
+    }
+    
+    public func setProgressLabel(currentTime: Double) {
         self.currentTimeLabel.text = self.contertTimevalToString(currentTime)
     }
     
@@ -254,6 +260,9 @@ public class PlayerVisualControlBar: UIView {
      Layout bar components.
      */
     public func layoutBarViews() {
+        if self.barLayouted {
+            return
+        }
         self.maxTimeLabel.text = self.contertTimevalToString(0)
         self.maxTimeLabel.textColor =  UIColor(red: 0.8494, green: 0.8494, blue: 0.8494, alpha: 1.0)
         self.maxTimeLabel.textAlignment = .Center
@@ -304,6 +313,8 @@ public class PlayerVisualControlBar: UIView {
             make.centerY.equalTo(self.currentTimeLabel)
             make.height.equalTo(self.currentTimeLabel)
         }
+        
+        self.barLayouted = true
     }
     
     // MARK: - Private
@@ -318,6 +329,7 @@ public class PlayerVisualControlBar: UIView {
     private var barTimer: NSTimer?
     private var barMaxTime: Double = 0
     private var sliderAcceptChange: Bool = false
+    private var barLayouted: Bool = false
     private var isPlayBottonPlay = false
     private var isBarHide = false
     private var isAnimating = false

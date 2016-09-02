@@ -302,8 +302,13 @@ extension PlayerVisualViewDefault {
     }
     
     public func playerVisualControlBarProgressPreferChange(playerVisual: PlayerVisual, currentTime: NSTimeInterval, maximumDuration: NSTimeInterval) {
+        guard 0 < maximumDuration else {
+            return
+        }
+        
         if 0 == currentTime {
             self.controlBar.setMaxTime(maximumDuration)
+            self.controlBar.setMaxTimeLabel(maximumDuration)
         }
         
         let diffTime = self.lastBarProgressUpdate < currentTime ? currentTime - self.lastBarProgressUpdate : self.lastBarProgressUpdate - currentTime
@@ -311,6 +316,7 @@ extension PlayerVisualViewDefault {
         if currentTime == 0 || currentTime == maximumDuration || diffTime >= self.barProgressResolution {
             self.lastBarProgressUpdate = currentTime
             self.controlBar.setProgress(currentTime)
+            self.controlBar.setProgressLabel(currentTime)
         }
     }
     

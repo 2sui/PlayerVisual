@@ -38,8 +38,9 @@ class ViewController: UIViewController, PlayerVisualDefaultDelegate {
         self.player.addToViewController(self, toView: self.videoView)
         
         let url = NSURL(string: "https://static.videezy.com/system/resources/previews/000/004/685/original/Geo_Glass_-_Slideshow.mp4")!
-        self.player.setUrl(url)
+//        let url = NSURL(string: "http://mazwai.com/system/posts/videos/000/000/222/preview_mp4_3/ha_long_bay-penn_productions.mp4")!
         
+        self.player.setUrl(url)
         self.player.autoPlay = false
         self.player.bufferSize = 6 // cache 6s data
         self.player.playbackLoops = false
