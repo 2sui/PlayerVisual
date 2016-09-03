@@ -54,14 +54,15 @@ class ViewController: UIViewController, PlayerVisualDefaultDelegate {
     override func shouldAutorotate() -> Bool {
         return shouldFullScreen
     }
-}
-
-extension ViewController {
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
         self.shouldFullScreen = false
     }
+}
+
+extension ViewController {
+    
     
     func controlBarDidSlideToValue(value: Double) {
         NSLog("\(#function) value: \(value)")
@@ -81,9 +82,21 @@ extension ViewController {
     }
     
     func controlBarFullScreenBottonDidTapped() {
+        if UIDevice.currentDevice().orientation.isPortrait {
+            if nil != self.fullScreenController {
+                return
+            }
+            
+        } else {
+            if nil == self.fullScreenController {
+                return
+            }
+        }
+        
         self.shouldFullScreen = true
         
         if nil != self.fullScreenController {
+            
             self.player.addToViewController(self, toView: self.videoView)
             
             self.fullScreenController!.willMoveToParentViewController(nil)
